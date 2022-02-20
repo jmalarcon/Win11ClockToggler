@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Win11ClockToggler
 {
@@ -45,12 +47,40 @@ namespace Win11ClockToggler
                     //If we want to actuate over the full notification area, then we need to show/hide all the children
                     if (tbeToShowOrHide == TaskbarElement.FullNotificationArea)
                     {
+                        List<int> hiddenHwnds = new List<int>();
+                        //If its a show operation, get the already hidden hwnds, if any
+                        if (operationPerformed == SWOperation.Show)
+                        {
+                            hiddenHwnds = Helper.GetHiddenHwnds();
+                        }
                         //Enumerate notification area children to find the system icons (and therefore the clock)
                         List<IntPtr> children = Win32APIs.GetChildWindows(hWndNotifArea);
                         foreach (IntPtr child in children)
                         {
+                            if (operationPerformed == SWOperation.Hide)
+                            {
+                                if (!Win32APIs.IsWindowVisible(child))
+                                {
+                                    //Add the element to the already hidden list, so that we don't show them in the future
+                                    hiddenHwnds.Add(child.ToInt32());
+                                    continue;
+                                }
+                            }
+                            else
+                            {
+                                //If it was initially hidden then skip it
+                                if (hiddenHwnds.Contains(child.ToInt32()))
+                                    continue;
+                            }
                             Win32APIs.ShowWindow(child, operation);
+                            
                         }
+
+                        //When hiding, save the hwnds of elements already hidden in origin (to prevent showing then later)
+                        if (operationPerformed == SWOperation.Hide)
+                            SaveHiddenHwnds(hiddenHwnds);
+                        else
+                            SaveHiddenHwnds(new List<int>() { });   //Clear the list
                     }
                     //The clock (and system icons) area must be the last in being hidden,
                     //or it would interfere in the state for the elements in the previous loop...
@@ -62,5 +92,48 @@ namespace Win11ClockToggler
             operationPerformed = SWOperation.None;
             return false;   //Failure
         }
+
+        //Registry location for this app settings
+        static string REG_KEY = @"SOFTWARE\Win11ClockToggler";
+        static string REG_VALUE = "HiddenHwnds";
+        //Read the list of Hwnds already hidden from Windows registry
+        internal static List<int> GetHiddenHwnds()
+        {
+            List<int> res = new List<int>();
+            try
+            {
+                RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(REG_KEY);
+                string strHwnds = (string)registryKey.GetValue(REG_VALUE);
+                res = strHwnds.Split('|').Select(int.Parse).ToList<int>();
+            }
+            catch {}
+            return res;
+        }
+
+        //Saves to te registry the list of already hiden Hwnds before hiding the elements
+        internal static void SaveHiddenHwnds(List<int> hiddenHwnds)
+        {
+            string value = string.Join("|", hiddenHwnds.ToArray());
+            if (!HiddenHwndsKeyExists())
+                Registry.CurrentUser.CreateSubKey(REG_KEY, true);
+
+            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(REG_KEY, true);
+            registryKey.SetValue(REG_VALUE, value);
+        }
+
+        //Check if the key exists or not
+        internal static bool HiddenHwndsKeyExists()
+        {
+            try
+            {
+                RegistryKey key = Registry.LocalMachine.OpenSubKey(REG_KEY);
+                return (key != null);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
     }
 }
