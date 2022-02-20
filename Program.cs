@@ -61,6 +61,23 @@ namespace Win11ClockToggler
                     "If you already have the latest version, maybe a Windows 11 update has broken the compatibility. Please, open an issue to let me know!");
             }
 
+            //Check if there's a new version available
+            string nv = VersionChecker.GetLatestAvailableVersion();
+            if (nv == null)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"There's a problem checking new versions of Win11ClockToggler. Check your internet connection.");
+                Console.ResetColor();
+            }
+            else if (nv != string.Empty)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"There's a new version of Win11ClockToggler available: {nv}");
+                Console.WriteLine("Check: https://github.com/jmalarcon/Win11ClockToggler/releases");
+                Console.ResetColor();
+            }
+
+
             //If in batch mode, then don't wait for confirmation to end
             if (IsModifierOn(args, "batch"))
                 return;
@@ -111,6 +128,8 @@ Arguments:
 More information and new versions at: https://github.com/jmalarcon/Win11ClockToggler
 
 If you find any kind of problem, download the latest version or open a new issue in the repo.
+
+It automatically checks for new versions maximum once a day.
 ";
     }
 }

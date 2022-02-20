@@ -95,18 +95,16 @@ namespace Win11ClockToggler
 
         //Registry location for this app settings
         static string REG_KEY = @"SOFTWARE\Win11ClockToggler";
-        static string REG_VALUE = "HiddenHwnds";
+        static string REG_HWNDS_VALUE = "HiddenHwnds";
+        static string REG_LAST_VERSION_CHECK_VALUE = "LastVersionCheck"; 
+
         //Read the list of Hwnds already hidden from Windows registry
         internal static List<int> GetHiddenHwnds()
         {
             List<int> res = new List<int>();
-            try
-            {
-                RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(REG_KEY);
-                string strHwnds = (string)registryKey.GetValue(REG_VALUE);
+            string strHwnds = ReadRegValue(REG_HWNDS_VALUE);
+            if (strHwnds != String.Empty)
                 res = strHwnds.Split('|').Select(int.Parse).ToList<int>();
-            }
-            catch {}
             return res;
         }
 
@@ -114,19 +112,43 @@ namespace Win11ClockToggler
         internal static void SaveHiddenHwnds(List<int> hiddenHwnds)
         {
             string value = string.Join("|", hiddenHwnds.ToArray());
-            if (!HiddenHwndsKeyExists())
-                Registry.CurrentUser.CreateSubKey(REG_KEY, true);
-
-            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(REG_KEY, true);
-            registryKey.SetValue(REG_VALUE, value);
+            EnsureAppKeyExists();
+            SaveRegValue(REG_HWNDS_VALUE, value);
         }
 
+        //Checks if the key exists or not, creating it if needed
+        internal static void EnsureAppKeyExists()
+        {
+            if (!RegKeyExists(REG_KEY))
+                Registry.CurrentUser.CreateSubKey(REG_KEY, true);
+        }
+
+        //Gets the last time a version check was made
+        internal static DateTime GetLastVersionCheckDateTime()
+        {
+            //Default value (never checked)
+            DateTime checkedDT = DateTime.MinValue;
+
+            string sCheckedDT = ReadRegValue(REG_LAST_VERSION_CHECK_VALUE);
+            if (sCheckedDT != string.Empty)
+                DateTime.TryParse(sCheckedDT, out checkedDT);
+
+            return checkedDT;
+        }
+
+        //Saves current time as the last time the version was checked
+        internal static void SaveLastVersionCheckDateTime()
+        {
+            SaveRegValue(REG_LAST_VERSION_CHECK_VALUE, DateTime.Now.ToString());
+        }
+
+        #region General registry helpers
         //Check if the key exists or not
-        internal static bool HiddenHwndsKeyExists()
+        internal static bool RegKeyExists(string regKey)
         {
             try
             {
-                RegistryKey key = Registry.LocalMachine.OpenSubKey(REG_KEY);
+                RegistryKey key = Registry.LocalMachine.OpenSubKey(regKey);
                 return (key != null);
             }
             catch (Exception)
@@ -135,5 +157,27 @@ namespace Win11ClockToggler
             }
         }
 
+        //Saves to te registry the list of already hiden Hwnds before hiding the elements
+        internal static void SaveRegValue(string name, string value)
+        {
+            EnsureAppKeyExists();
+            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(REG_KEY, true);
+            registryKey.SetValue(name, value);
+        }
+
+        //Reads a value from registry
+        internal static string ReadRegValue(string name)
+        {
+            string value = string.Empty;
+            try
+            {
+                RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(REG_KEY);
+                value = (string)registryKey.GetValue(name);
+            }
+            catch { }
+            return value;
+        }
+
+        #endregion
     }
 }
