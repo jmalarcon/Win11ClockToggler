@@ -22,6 +22,12 @@ namespace Win11ClockToggler
         [DllImport("user32.dll", SetLastError = true)]
         internal static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr hWndChildAfter, string className, string windowTitle);
 
+        //Enumerates all top-level windows on the screen by passing the handle to each window, in turn, to an application-defined callback function.
+        //EnumWindows continues until the last top-level window is enumerated or the callback function returns FALSE.
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool EnumWindows(EnumWindowsProc lpEnumFunc, IntPtr lParam);
+
         //Enumerates the child windows that belong to the specified parent window by passing the handle
         //to each child window, in turn, to an application-defined callback function
         [DllImport("user32.dll")]
@@ -65,8 +71,8 @@ namespace Win11ClockToggler
             GCHandle ListHandle = GCHandle.Alloc(ChildrenList);
             try
             {
-                EnumWindowsProc enumProc = new EnumWindowsProc(EnumWindow);
-                EnumChildWindows(ParentHandle, EnumWindow, GCHandle.ToIntPtr(ListHandle));
+                EnumWindowsProc enumProc = new EnumWindowsProc(EnumAllWindows);
+                EnumChildWindows(ParentHandle, enumProc, GCHandle.ToIntPtr(ListHandle));
             }
             finally
             {
@@ -76,7 +82,24 @@ namespace Win11ClockToggler
             return ChildrenList;
         }
 
-        private static bool EnumWindow(IntPtr Handle, IntPtr Parameter)
+        internal static List<IntPtr> GetAllSecondaryTaskBars()
+        {
+            List<IntPtr> hwndList = new List<IntPtr>();
+            GCHandle ListHandle = GCHandle.Alloc(hwndList);
+            try
+            {
+                EnumWindowsProc enumProc = new EnumWindowsProc(EnumShell_SecondaryTrayWndWindows);
+                EnumWindows(enumProc, GCHandle.ToIntPtr(ListHandle));
+            }
+            finally
+            {
+                if (ListHandle.IsAllocated)
+                    ListHandle.Free();
+            }
+            return hwndList;
+        }
+
+        private static bool EnumAllWindows(IntPtr Handle, IntPtr Parameter)
         {
             List<IntPtr> ChildrenList = GCHandle.FromIntPtr(Parameter).Target as List<IntPtr>;
             if (ChildrenList == null)
@@ -84,6 +107,20 @@ namespace Win11ClockToggler
             ChildrenList.Add(Handle);
             return true;
         }
-#endregion
+
+        private static bool EnumShell_SecondaryTrayWndWindows(IntPtr Handle, IntPtr Parameter)
+        {
+            List<IntPtr> ChildrenList = GCHandle.FromIntPtr(Parameter).Target as List<IntPtr>;
+            if (ChildrenList == null)
+                throw new Exception("GCHandle Target could not be cast as List(Of IntPtr)");
+            //This is the class name for all the secondary taskbars
+            //The structure is different from the main one
+            if (Win32APIs.GetClassName(Handle) == "Shell_SecondaryTrayWnd")
+            {
+                ChildrenList.Add(Handle);
+            }
+            return true;
+        }
+        #endregion
     }
 }

@@ -20,7 +20,7 @@ namespace Win11ClockToggler
             //Default value for the argument for which element to hide
             string hiddenElement = "notificationArea";
 
-            //Try to hide the selected element
+            //Try to show/hide the selected element
             if (IsModifierOn(args, "clock"))
             {
                 hiddenElement = "clock";
@@ -31,6 +31,10 @@ namespace Win11ClockToggler
                 //Select the correct area to hide (by default it hides only the clock)
                 operationSucceeded = Helper.ShowOrHideTaskbarElementWindow(Helper.TaskbarElement.FullNotificationArea, out operation);
             }
+
+            //Try to show/hide secondary windows taskbar's datetime/clock
+            if (IsModifierOn(args, "secondary"))
+                Helper.ShowOrHideSecondaryTaskbarsElementWindow();
 
             //Check success
             if (operationSucceeded)
@@ -121,8 +125,9 @@ in the notifications' configuration of the Windows Settings app
 
 Arguments:
 -h, /h, --help: this help
--n, /n, --notificationArea: hides the full notification area, not just the clock (cleaner. Default option)
--c, /c, --clock: hides just the clock (and system icons)
+-n, /n, --notificationArea: hides/shows the full notification area, not just the clock (cleaner. Default option)
+-c, /c, --clock: hides/shows just the clock (and system icons)
+-s, /s, --secondary: hides/shows the secondary screens' clocks too (by default only the main taskbar elements are hidden/shows)
 -b, /b, --batch: doesn't wait for a key to be pressed after running. Useful to include the tool in a script file.
 
 More information and new versions at: https://github.com/jmalarcon/Win11ClockToggler

@@ -93,6 +93,30 @@ namespace Win11ClockToggler
             return false;   //Failure
         }
 
+        internal static void ShowOrHideSecondaryTaskbarsElementWindow()
+        {
+            //Find Windows secondary Taskbar (it's like a secondary tray from the main one)
+            //Secondary Taskbar handler
+            List<IntPtr> secondaryTaskBars = Win32APIs.GetAllSecondaryTaskBars();
+
+            secondaryTaskBars.ForEach(
+                hWndSecTaskbar =>
+                {
+                    //Enumerate notification area children
+                    List<IntPtr> children = Win32APIs.GetChildWindows(hWndSecTaskbar);
+                    //The last DesktopWindowContentBridge is the datetime/clock
+                    var dateTimeWnd = children.FindLast(child =>
+                        Win32APIs.GetClassName(child) == "Windows.UI.Composition.DesktopWindowContentBridge");
+
+                    //If found, just toggle its visibility
+                    if (dateTimeWnd != IntPtr.Zero)
+                    {
+                        Win32APIs.ShowWindow(dateTimeWnd, Win32APIs.IsWindowVisible(dateTimeWnd) ? Win32APIs.SW_HIDE : Win32APIs.SW_SHOW);
+                    }
+                }
+            );
+        }
+
         //Registry location for this app settings
         static string REG_KEY = @"SOFTWARE\Win11ClockToggler";
         static string REG_HWNDS_VALUE = "HiddenHwnds";
