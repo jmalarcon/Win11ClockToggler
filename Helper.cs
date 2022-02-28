@@ -106,7 +106,8 @@ namespace Win11ClockToggler
                     List<IntPtr> children = Win32APIs.GetChildWindows(hWndSecTaskbar);
                     //The last DesktopWindowContentBridge is the datetime/clock
                     var dateTimeWnd = children.FindLast(child =>
-                        Win32APIs.GetClassName(child) == "Windows.UI.Composition.DesktopWindowContentBridge");
+                        Win32APIs.GetClassName(child) == "Windows.UI.Composition.DesktopWindowContentBridge" ||
+                        Win32APIs.GetClassName(child) == "ClockButton");
 
                     //If found, just toggle its visibility
                     if (dateTimeWnd != IntPtr.Zero)
