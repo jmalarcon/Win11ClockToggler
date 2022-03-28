@@ -28,7 +28,12 @@ The full list of arguments you can use from the command line or PowerShell are:
 - **`-s`**, **`/s`**, **`--secondary`**: hides/shows the secondary screen's date/times too (new in Windows 11 [KB5010414, Feb.15 2022](https://support.microsoft.com/en-us/topic/february-15-2022-kb5010414-os-build-22000-527-preview-73e259d0-45ca-45ef-960f-426035104e73)). By default it will only hide the date/time in the main screen.
 - **`-b`, `/b`, `--batch`**: doesn't wait for a key to be pressed after running. Useful to include the tool in a script file.
 
-> **IMPORTANT**: It works for **Windows 10** too, but it will always hide the full notification area.
-> If you just want to hide the clock in Windows 10, you already have native support for it in the notifications' configuration of the Windows Settings app. I don't test it thoroughly in Windows 10, so I don't recommend using it with it. It's a Windows 11 tool.
+> **VERY IMPORTANT**: if ypou receive any notifications while the date/time or the notification area are hidden, they will automatically show up again. This is how Windows works. I'll try to make a fix for it, but the best way to go anyway, if you're recording your screen, is to activate the `Focus Assist` feature of Windows 11, and set it to `Alarms only`. In that way notifications won't disturb you (and won't make the date/time appear again).
+>
+>The fastest way to enable it is by clicking on the sustem icons and then the `Focus Assist` switch twice, like this:
+>
+>![Activating the Focus Assist](dnd-mode-win11.png)
+
+It works for **Windows 10** too, but it will always hide the full notification area. If you just want to hide the clock in Windows 10, you already have native support for it in the notifications' configuration of the Windows Settings app. I don't test it thoroughly in Windows 10, so I don't recommend using it with it. It's a Windows 11 tool.
 
 If you find any kind of problem using it, maybe is because of new updates to Windows 11 that break compatibility. In thar case, please, open an issue here to tell me about it. Thanks.
