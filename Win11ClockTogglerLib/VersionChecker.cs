@@ -6,13 +6,13 @@ using System.Text.RegularExpressions;
 namespace Win11ClockToggler
 {
     //Helper class to check if there are new released versions for the app
-    internal static class VersionChecker
+    public static class VersionChecker
     {
         /// <summary>
         /// Gets the current app's version
         /// </summary>
         /// <returns>A string with the current number</returns>
-        internal static string GetCurrentVersion()
+        public static string GetCurrentVersion()
         {
             return Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
@@ -28,7 +28,7 @@ namespace Win11ClockToggler
         /// It only gets the numbers and dots (eg: "v1.0.0" or "version 1.0.0" will only return "1.0.0".
         /// Only checks this once per day
         /// </remarks>
-        internal static string GetLatestAvailableVersion()
+        public static string GetLatestAvailableVersion()
         {
             //Check the last time the chack was made
             DateTime lastChecked = Helper.GetLastVersionCheckDateTime();

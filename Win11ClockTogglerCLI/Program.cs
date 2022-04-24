@@ -14,7 +14,7 @@ namespace Win11ClockToggler
             }
 
             //Check the success of the operation
-            bool operationSucceeded = false;
+            bool operationSucceeded;
             //Operation performed (hide or show)
             Helper.SWOperation operation;
             //Default value for the argument for which element to hide
@@ -24,12 +24,12 @@ namespace Win11ClockToggler
             if (IsModifierOn(args, "clock"))
             {
                 hiddenElement = "clock";
-                operationSucceeded = Helper.ShowOrHideTaskbarElementWindow(Helper.TaskbarElement.Clock, out operation);
+                operationSucceeded = Helper.ToggleTaskbarElements(Helper.TaskbarElement.Clock, out operation);
             }
             else
             {
                 //Select the correct area to hide (by default it hides only the clock)
-                operationSucceeded = Helper.ShowOrHideTaskbarElementWindow(Helper.TaskbarElement.FullNotificationArea, out operation);
+                operationSucceeded = Helper.ToggleTaskbarElements(Helper.TaskbarElement.FullNotificationArea, out operation);
             }
 
             //Try to show/hide secondary windows taskbar's datetime/clock
@@ -108,7 +108,7 @@ namespace Win11ClockToggler
         }
 
         //Help string (aside to make the beginning clearer)
-        static string helpStr = @"This program searches and hides the full notification area or just the clock in the Windows 11 taskbar, 
+        static readonly string helpStr = @"This program searches and hides the full notification area or just the clock in the Windows 11 taskbar, 
 since this OS lacks this feature and this is a bummer for recording 
 your screen for tutorials and other similar tasks.
 

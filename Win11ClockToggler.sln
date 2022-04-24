@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Win11ClockToggler", "Win11ClockToggler.csproj", "{CEFDDEA0-791E-48C6-8319-A9018DCD8784}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Win11ClockTogglerCLI", "Win11ClockTogglerCLI\Win11ClockTogglerCLI.csproj", "{CEFDDEA0-791E-48C6-8319-A9018DCD8784}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Win11ClockTogglerLib", "Win11ClockTogglerLib\Win11ClockTogglerLib.csproj", "{88EB8C49-1A30-49E2-9081-5EFE0F589E2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Win11ClockTogglerGUI", "Win11ClockTogglerGUI\Win11ClockTogglerGUI.csproj", "{C718781E-D1A6-45FD-A239-7DC3FBF053CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{CEFDDEA0-791E-48C6-8319-A9018DCD8784}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEFDDEA0-791E-48C6-8319-A9018DCD8784}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEFDDEA0-791E-48C6-8319-A9018DCD8784}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88EB8C49-1A30-49E2-9081-5EFE0F589E2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88EB8C49-1A30-49E2-9081-5EFE0F589E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88EB8C49-1A30-49E2-9081-5EFE0F589E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88EB8C49-1A30-49E2-9081-5EFE0F589E2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C718781E-D1A6-45FD-A239-7DC3FBF053CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C718781E-D1A6-45FD-A239-7DC3FBF053CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C718781E-D1A6-45FD-A239-7DC3FBF053CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C718781E-D1A6-45FD-A239-7DC3FBF053CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

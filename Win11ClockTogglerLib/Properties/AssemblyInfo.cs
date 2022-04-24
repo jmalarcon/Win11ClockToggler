@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Win11ClockToggler")]
-[assembly: AssemblyDescription("Turns off or on the clock (and sys icons) on the toolbar in Windows 11")]
+[assembly: AssemblyTitle("Win11ClockTogglerLib")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("jmalarcon")]
-[assembly: AssemblyProduct("Win11ClockToggler")]
-[assembly: AssemblyCopyright("José M. Alarcón 2022 - Apache 2.0 License")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Win11ClockTogglerLib")]
+[assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("cefddea0-791e-48c6-8319-a9018dcd8784")]
+[assembly: Guid("88eb8c49-1a30-49e2-9081-5efe0f589e2f")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.3.1.0")]
-[assembly: AssemblyFileVersion("1.3.1.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
