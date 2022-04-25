@@ -13,9 +13,7 @@ namespace Win11ClockToggler
                 return;
             }
 
-            //Check the success of the operation
-            bool operationSucceeded;
-            //Operation performed (hide or show)
+            //Operation performed (hide or show or None if failure)
             Helper.SWOperation operation;
             //Default value for the argument for which element to hide
             string hiddenElement = "notificationArea";
@@ -24,45 +22,41 @@ namespace Win11ClockToggler
             if (IsModifierOn(args, "clock"))
             {
                 hiddenElement = "clock";
-                operationSucceeded = Helper.ToggleTaskbarElements(Helper.TaskbarElement.Clock, out operation);
+                operation = Helper.ToggleTaskbarElements(Helper.TaskbarElement.Clock);
             }
             else
             {
                 //Select the correct area to hide (by default it hides only the clock)
-                operationSucceeded = Helper.ToggleTaskbarElements(Helper.TaskbarElement.FullNotificationArea, out operation);
+                operation = Helper.ToggleTaskbarElements(Helper.TaskbarElement.FullNotificationArea);
             }
 
             //Try to show/hide secondary windows taskbar's datetime/clock
             if (IsModifierOn(args, "secondary"))
                 Helper.ShowOrHideSecondaryTaskbarsElementWindow();
 
-            //Check success
-            if (operationSucceeded)
+            //Check the success of the operation (Hide or Show)
+            switch (operation)
             {
-                //Check if it has been hidden or made visible to inform
-                if (operation == Helper.SWOperation.Hide)
-                { 
+                case Helper.SWOperation.Hide:
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("The Windows taskbar {0} has been hidden!", hiddenElement);
                     Console.ResetColor();
                     Console.WriteLine("Run this program again to show it back...");
-                }
-                else
-                {
+                    break;
+                case Helper.SWOperation.Show:
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("The Windows taskbar {0} has been shown again!", hiddenElement);
                     Console.ResetColor();
                     Console.WriteLine("Run this program again to hide it...");
-                }
-            }
-            else    //If it fails
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("I can't find the Windows {0} to hide it!", hiddenElement);
-                Console.ResetColor();
-                Console.WriteLine("This program only works with Windows 11. " +
-                    "If you're running it in Windows 11, please download the latest version from https://github.com/jmalarcon/Win11ClockToggler. " +
-                    "If you already have the latest version, maybe a Windows 11 update has broken the compatibility. Please, open an issue to let me know!");
+                    break;
+                default:
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("I can't find the Windows {0} to hide it!", hiddenElement);
+                    Console.ResetColor();
+                    Console.WriteLine("This program only works with Windows 11. " +
+                        "If you're running it in Windows 11, please download the latest version from https://github.com/jmalarcon/Win11ClockToggler. " +
+                        "If you already have the latest version, maybe a Windows 11 update has broken the compatibility. Please, open an issue to let me know!");
+                    break;
             }
 
             //Check if there's a new version available
@@ -113,15 +107,18 @@ since this OS lacks this feature and this is a bummer for recording
 your screen for tutorials and other similar tasks.
 
 Just run it and it'll hide the whole notification area by default. 
-To show it again, just run the program again too. It will detect 
-the previous stae and change it accordingly.
+To show it again, just run the program again too.
 If you want to hide just the clock, use the appropiate switch (see below),
 however, take into account that it'll hide the clock and the system icons too. 
 This is due to how that area is build in the Windows 11 taskbar.
 
-It works for Windows 10 too, but it will always hide the full notification area.
-If you just want to hide the clock in Windows 10, you already have native support for it
+It works for Windows 10 too but if you just want to hide the clock in Windows 10, you already have native support for it
 in the notifications' configuration of the Windows Settings app
+
+IMPORTANT: if you don't enable the Focus Assist option (do not disturb mode in Windows)
+           any new notification or new added tray icon will show everything again. 
+           Use the CLI version of the app (thas monitors this in the background if you 
+           don't close it and/or enable Focus Assist to prevent it.
 
 Arguments:
 -h, /h, --help: this help

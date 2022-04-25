@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Win11ClockToggler
 {
@@ -46,6 +47,15 @@ namespace Win11ClockToggler
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool IsWindowVisible(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        internal static extern bool InvalidateRect(IntPtr hWnd, IntPtr lpRect, bool bErase);
+
+        [DllImport("winbrand.dll", CharSet = CharSet.Unicode)]
+        [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+        internal static extern string BrandingFormatString(string format);
+
+
         #endregion
 
         #region internal methods to simplify the use of some APIs
@@ -121,6 +131,27 @@ namespace Win11ClockToggler
             }
             return true;
         }
+
+        internal static void InvalidateWindow(IntPtr hWnd)
+        {
+            if (hWnd != IntPtr.Zero)
+                InvalidateRect(hWnd, IntPtr.Zero, true);
+        }
+
+        //Use the Win32 API to get the brand string
+        //We can use the System.Environment.OSVersion.Version.Build because in .NET framework it always shows an old version
+        public static int GetWindowsMajorVersion()
+        {
+            string brand = Win32APIs.BrandingFormatString("%WINDOWS_LONG%");
+            //Look for the Windows version in the string with a Regular Expression
+            Regex regex = new Regex(@"Windows (\d+)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+            var matches = regex.Matches(brand);
+            if (matches.Count > 0 && matches[0].Groups.Count > 1)   //The capture contains the version number
+                return int.Parse(matches[0].Groups[1].Value);
+            else
+                return 11;  //If the API is not able to get the version, assume it's 11, which is the main aim of the app
+        }
+
         #endregion
     }
 }

@@ -37,6 +37,9 @@
             this.chkNotifArea = new System.Windows.Forms.CheckBox();
             this.chkDateTime = new System.Windows.Forms.CheckBox();
             this.tmrShowMonitor = new System.Windows.Forms.Timer(this.components);
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.lnkNewVersion = new System.Windows.Forms.LinkLabel();
+            this.bgwCheckVersion = new System.ComponentModel.BackgroundWorker();
             this.pnlCheckBoxes.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,7 +48,7 @@
             this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.Location = new System.Drawing.Point(31, 144);
+            this.btnExit.Location = new System.Drawing.Point(30, 144);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(200, 37);
             this.btnExit.TabIndex = 3;
@@ -57,7 +60,7 @@
             // 
             this.btnHideShow.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnHideShow.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHideShow.Location = new System.Drawing.Point(455, 144);
+            this.btnHideShow.Location = new System.Drawing.Point(454, 144);
             this.btnHideShow.Name = "btnHideShow";
             this.btnHideShow.Size = new System.Drawing.Size(200, 37);
             this.btnHideShow.TabIndex = 4;
@@ -136,6 +139,34 @@
             this.tmrShowMonitor.Interval = 10;
             this.tmrShowMonitor.Tick += new System.EventHandler(this.tmrShowMonitor_Tick);
             // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "Win11ClockTogglerCLI";
+            this.notifyIcon.Visible = true;
+            // 
+            // lnkNewVersion
+            // 
+            this.lnkNewVersion.AutoEllipsis = true;
+            this.lnkNewVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkNewVersion.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkNewVersion.LinkColor = System.Drawing.Color.Red;
+            this.lnkNewVersion.Location = new System.Drawing.Point(13, 99);
+            this.lnkNewVersion.Name = "lnkNewVersion";
+            this.lnkNewVersion.Size = new System.Drawing.Size(658, 30);
+            this.lnkNewVersion.TabIndex = 7;
+            this.lnkNewVersion.TabStop = true;
+            this.lnkNewVersion.Text = "⚠ New version 2.0.0 available! Click here to download...";
+            this.lnkNewVersion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lnkNewVersion.Visible = false;
+            this.lnkNewVersion.VisitedLinkColor = System.Drawing.Color.Red;
+            this.lnkNewVersion.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkNewVersion_LinkClicked);
+            // 
+            // bgwCheckVersion
+            // 
+            this.bgwCheckVersion.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwCheckVersion_DoWork);
+            this.bgwCheckVersion.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwCheckVersion_RunWorkerCompleted);
+            // 
             // Win11ClockTogglerGUI
             // 
             this.AcceptButton = this.btnHideShow;
@@ -144,6 +175,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnExit;
             this.ClientSize = new System.Drawing.Size(683, 193);
+            this.Controls.Add(this.lnkNewVersion);
             this.Controls.Add(this.btnHideShow);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.pnlCheckBoxes);
@@ -155,6 +187,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Windows 11 Date//Time & Notification Area Toggler";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Win11ClockTogglerGUI_FormClosing);
             this.Load += new System.EventHandler(this.Win11ClockTogglerGUI_Load);
             this.pnlCheckBoxes.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -169,6 +202,9 @@
         private System.Windows.Forms.CheckBox chkNotifArea;
         private System.Windows.Forms.CheckBox chkDateTime;
         private System.Windows.Forms.Timer tmrShowMonitor;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.LinkLabel lnkNewVersion;
+        private System.ComponentModel.BackgroundWorker bgwCheckVersion;
     }
 }
 
