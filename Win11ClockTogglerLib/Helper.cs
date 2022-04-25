@@ -112,6 +112,24 @@ namespace Win11ClockToggler
             );
         }
 
+        public static IntPtr GetDateTimeControlHWnd()
+        {
+            IntPtr clockHWnd = IntPtr.Zero; //Default value
+
+            //Get Tray Win32 child windows
+            List<IntPtr> children = GetTrayNotifyHWndChildren();
+            if (children.Count > 0)     //If Zero the taskbar has changed and is not Win10 Or 11
+            {
+                //Get the clock (date/time) control in Windows 11
+                clockHWnd = children.Find(child => Win32APIs.GetClassName(child) == "Windows.UI.Composition.DesktopWindowContentBridge");
+                if (clockHWnd == IntPtr.Zero)   //Check for control in Windows 10
+                {
+                    clockHWnd = children.Find(child => Win32APIs.GetClassName(child) == "TrayClockWClass");
+                }
+            }
+            return clockHWnd;
+        }
+
         //Gets a list of hWnds for all the controls we need to manipulate to show/hide the notification area (depends on the O.S.)
         public static List<IntPtr> GetNotificationAreaHWnds()
         {
@@ -212,24 +230,6 @@ namespace Win11ClockToggler
                 return new List<IntPtr>();  //Empty list
             else
                 return Win32APIs.GetChildWindows(hWnd);
-        }
-
-        internal static IntPtr GetDateTimeControlHWnd()
-        {
-            IntPtr clockHWnd = IntPtr.Zero; //Default value
-
-            //Get Tray Win32 child windows
-            List<IntPtr> children = GetTrayNotifyHWndChildren();
-            if (children.Count > 0)     //If Zero the taskbar has changed and is not Win10 Or 11
-            {
-                //Get the clock (date/time) control in Windows 11
-                clockHWnd = children.Find(child => Win32APIs.GetClassName(child) == "Windows.UI.Composition.DesktopWindowContentBridge");
-                if (clockHWnd == IntPtr.Zero)   //Check for control in Windows 10
-                {
-                    clockHWnd = children.Find(child => Win32APIs.GetClassName(child) == "TrayClockWClass");
-                }
-            }
-            return clockHWnd;
         }
 
         #endregion

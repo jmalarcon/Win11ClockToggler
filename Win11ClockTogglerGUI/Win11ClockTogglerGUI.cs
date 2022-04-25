@@ -60,27 +60,30 @@ namespace Win11ClockTogglerGUI
                     IsDirty = true;
                     btnExit.Text = "Restore && Exit";
                     pnlCheckBoxes.Enabled = false;
+                    //Monitor the notification area in case it pops up again for any reason
+                    //(if the user hasn't enabled Focus Assist, any notification or any new icon added to the tray will show all again)
+                    CurrentMonitoredControls.Add(Helper.GetDateTimeControlHWnd());  //Always monitor the Datetime control
                     if (chkNotifArea.Checked)
-                    {
-                        //Monitor the notification area in case it pops up again for any reason
-                        //(if the user hasn't enabled Focus Assist, any notification or any new icon added to the tray will show all again)
-                        CurrentMonitoredControls = Helper.GetNotificationAreaHWnds();   //It's a different list depending on the Windows version
-                        tmrShowMonitor.Enabled = true;
-                    }
+                        CurrentMonitoredControls.AddRange(Helper.GetNotificationAreaHWnds());   //It's a different list depending on the Windows version
+                    tmrShowMonitor.Enabled = true;
                     break;
                 case Helper.SWOperation.Show:
                     IsDirty = false;
                     btnExit.Text = "Exit";
                     pnlCheckBoxes.Enabled = true;
-                    if (chkNotifArea.Checked)
+                    //Stop monitoring the notificaton area
+                    tmrShowMonitor.Enabled = false;
+                    CurrentMonitoredControls = new List<IntPtr>();
+                    //This is a hack: dispose the notification icon (although it's not visible) to force a redraw of the notification area in Windows 10
+                    if (Helper.IsWindows10)
                     {
-                        //Stop monitoring the notificaton area
-                        tmrShowMonitor.Enabled = false;
-                        CurrentMonitoredControls = new List<IntPtr>();
+                        try
+                        {
+                            notifyIcon.Icon.Dispose();
+                            notifyIcon.Dispose();
+                        }
+                        catch { }
                     }
-                    //This is a hack: dispose the notification icon (although it's not visible) to force a redraw of the notification area
-                    notifyIcon.Icon.Dispose();
-                    notifyIcon.Dispose();
                     break;
                 default:  //Controls can't be found: something has changed in the underlying structure: notify
                     MessageBox.Show(@"The notification area and/or the Date/Time controls have not been found.
@@ -169,6 +172,11 @@ and let me know about this issue. Thanks!",
         private void lnkNewVersion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/jmalarcon/Win11ClockToggler/releases");
+        }
+
+        private void notifyIcon_Click(object sender, EventArgs e)
+        {
+            this.Show();
         }
     }
 }

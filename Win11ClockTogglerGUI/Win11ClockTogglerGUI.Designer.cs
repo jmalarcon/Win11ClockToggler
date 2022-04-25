@@ -143,7 +143,8 @@
             // 
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
             this.notifyIcon.Text = "Win11ClockTogglerCLI";
-            this.notifyIcon.Visible = true;
+            this.notifyIcon.Click += new System.EventHandler(this.notifyIcon_Click);
+            this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon_Click);
             // 
             // lnkNewVersion
             // 
