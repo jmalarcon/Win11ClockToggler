@@ -66,6 +66,9 @@ namespace Win11ClockTogglerGUI
                     if (chkNotifArea.Checked)
                         CurrentMonitoredControls.AddRange(Helper.GetNotificationAreaHWnds());   //It's a different list depending on the Windows version
                     tmrShowMonitor.Enabled = true;
+                    //Add notification icon (hack in Win10 to be able to restore the real width of the taskbar when showing it again)
+                    if (Helper.IsWindows10 && chkNotifArea.Checked)
+                        notifyIcon.Visible = true;
                     break;
                 case Helper.SWOperation.Show:
                     IsDirty = false;
@@ -75,15 +78,8 @@ namespace Win11ClockTogglerGUI
                     tmrShowMonitor.Enabled = false;
                     CurrentMonitoredControls = new List<IntPtr>();
                     //This is a hack: dispose the notification icon (although it's not visible) to force a redraw of the notification area in Windows 10
-                    if (Helper.IsWindows10)
-                    {
-                        try
-                        {
-                            notifyIcon.Icon.Dispose();
-                            notifyIcon.Dispose();
-                        }
-                        catch { }
-                    }
+                    if (Helper.IsWindows10 && chkNotifArea.Checked)
+                        notifyIcon.Visible = false;
                     break;
                 default:  //Controls can't be found: something has changed in the underlying structure: notify
                     MessageBox.Show(@"The notification area and/or the Date/Time controls have not been found.
@@ -130,6 +126,17 @@ and let me know about this issue. Thanks!",
             //Save the status of the checks to keep the latest option
             Helper.SaveRegValue(REG_CHKNOTIFAREA_STATUS, chkNotifArea.Checked ? "1" : "0");
             Helper.SaveRegValue(REG_CHKALLLDISPLAYS_STATUS, chkAllDisplays.Checked ? "1" : "0");
+
+            //Dispose Notify icons because of Windows 10 hack
+            if (Helper.IsWindows10 && chkNotifArea.Checked)
+            {
+                try
+                {
+                    notifyIcon.Icon.Dispose();
+                    notifyIcon.Dispose();
+                }
+                catch { }
+            }
 
             if (IsDirty)
                 btnHideShow_Click(null, null);

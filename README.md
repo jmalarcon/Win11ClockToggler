@@ -1,8 +1,8 @@
 # Win11ClockToggler
 
-One of the many bummers that **Windows 11** brings to the table is **the inability to hide the date/time** in the taskbar. This is really an annoyance if you create screen recordings or tutorials and don't want the clock to be shown in your final video.
+One of the many bummers in **Windows 11** is **the inability to hide the date/time** in the taskbar. This is really an annoyance if you create screen recordings or tutorials and don't want the clock to be shown in your final video.
 
-After waiting for months for them to fix this issue, I decided to write this small and fast little command line tool: **Win11ClockToggler**.
+After waiting for months for Microsoft to fix this issue, I decided to write this small and fast little command line tool: **Win11ClockToggler**.
 
 ![The app icon](Win11ClockToggler.png)
 
