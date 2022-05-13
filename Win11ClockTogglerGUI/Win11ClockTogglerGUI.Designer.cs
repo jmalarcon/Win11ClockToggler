@@ -40,6 +40,7 @@
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.lnkNewVersion = new System.Windows.Forms.LinkLabel();
             this.bgwCheckVersion = new System.ComponentModel.BackgroundWorker();
+            this.toggleSwitch1 = new JCS.ToggleSwitch();
             this.pnlCheckBoxes.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -168,6 +169,21 @@
             this.bgwCheckVersion.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwCheckVersion_DoWork);
             this.bgwCheckVersion.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwCheckVersion_RunWorkerCompleted);
             // 
+            // toggleSwitch1
+            // 
+            this.toggleSwitch1.Checked = true;
+            this.toggleSwitch1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.toggleSwitch1.Location = new System.Drawing.Point(310, 144);
+            this.toggleSwitch1.Name = "toggleSwitch1";
+            this.toggleSwitch1.OffFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toggleSwitch1.OffText = "HIDDEN";
+            this.toggleSwitch1.OnFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toggleSwitch1.OnForeColor = System.Drawing.Color.White;
+            this.toggleSwitch1.OnText = "VISIBLE";
+            this.toggleSwitch1.Size = new System.Drawing.Size(94, 21);
+            this.toggleSwitch1.Style = JCS.ToggleSwitch.ToggleSwitchStyle.Iphone;
+            this.toggleSwitch1.TabIndex = 6;
+            // 
             // Win11ClockTogglerGUI
             // 
             this.AcceptButton = this.btnHideShow;
@@ -176,6 +192,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnExit;
             this.ClientSize = new System.Drawing.Size(683, 193);
+            this.Controls.Add(this.toggleSwitch1);
             this.Controls.Add(this.lnkNewVersion);
             this.Controls.Add(this.btnHideShow);
             this.Controls.Add(this.btnExit);
@@ -206,6 +223,7 @@
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.LinkLabel lnkNewVersion;
         private System.ComponentModel.BackgroundWorker bgwCheckVersion;
+        private JCS.ToggleSwitch toggleSwitch1;
     }
 }
 

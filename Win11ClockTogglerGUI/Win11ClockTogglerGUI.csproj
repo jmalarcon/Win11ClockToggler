@@ -51,6 +51,23 @@
     <Compile Include="..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="toggleswitch\GraphicsExtensionMethods.cs" />
+    <Compile Include="toggleswitch\ImageHelper.cs" />
+    <Compile Include="toggleswitch\RendererChangedEventArgs.cs" />
+    <Compile Include="toggleswitch\Renderers\ToggleSwitchAndroidRenderer.cs" />
+    <Compile Include="toggleswitch\Renderers\ToggleSwitchBrushedMetalRenderer.cs" />
+    <Compile Include="toggleswitch\Renderers\ToggleSwitchCarbonRenderer.cs" />
+    <Compile Include="toggleswitch\Renderers\ToggleSwitchFancyRenderer.cs" />
+    <Compile Include="toggleswitch\Renderers\ToggleSwitchIOS5Renderer.cs" />
+    <Compile Include="toggleswitch\Renderers\ToggleSwitchIphoneRenderer.cs" />
+    <Compile Include="toggleswitch\Renderers\ToggleSwitchMetroRenderer.cs" />
+    <Compile Include="toggleswitch\Renderers\ToggleSwitchModernRenderer.cs" />
+    <Compile Include="toggleswitch\Renderers\ToggleSwitchOSXRenderer.cs" />
+    <Compile Include="toggleswitch\Renderers\ToggleSwitchPlainAndSimpleRenderer.cs" />
+    <Compile Include="toggleswitch\Renderers\ToggleSwitchRendererBase.cs" />
+    <Compile Include="toggleswitch\ToggleSwitch.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Win11ClockTogglerGUI.cs">
       <SubType>Form</SubType>
     </Compile>
