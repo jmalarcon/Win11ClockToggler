@@ -28,12 +28,11 @@ namespace Win11ClockTogglerGUI
             ControlPaint.DrawBorder(e.Graphics, current.ClientRectangle, Color.Black, ButtonBorderStyle.Solid);
         }
 
-        private void DisableCheckBox(CheckBox chkBox)
+        private void DisableCheckBox(JCS.ToggleSwitch chkBox)
         {
             chkBox.Enabled = false;
-            chkBox.ForeColor = SystemColors.InactiveCaption;
-            chkBox.BackColor = SystemColors.ControlLight;
-            chkBox.Font = new Font(chkBox.Font, FontStyle.Italic);
+            chkBox.Parent.ForeColor = SystemColors.InactiveCaption;
+            chkBox.Parent.BackColor = SystemColors.ControlLight;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -96,7 +95,7 @@ and let me know about this issue. Thanks!",
             }
 
             //Disable clock in secondary taskbars
-            if (chkAllDisplays.Checked)
+            if (chkSecondary.Checked)
                 Helper.ShowOrHideSecondaryTaskbarsElementWindow();
 
         }
@@ -107,14 +106,14 @@ and let me know about this issue. Thanks!",
             DisableCheckBox(chkDateTime);   //This is always fixed, for information purposes, because the Date/Time is always toggled
             //Get the latest state of the option checkboxes to keep them the same
             chkNotifArea.Checked = (Helper.ReadRegValue(REG_CHKNOTIFAREA_STATUS, "1") == "1");
-            chkAllDisplays.Checked = (Helper.ReadRegValue(REG_CHKALLLDISPLAYS_STATUS, "1") == "1");
+            chkSecondary.Checked = (Helper.ReadRegValue(REG_CHKALLLDISPLAYS_STATUS, "1") == "1");
 
             //Check if there are secondary taskbars in secondary windows
             if (!Helper.AreThereSecondaryTaskbars())
             { 
                 //Disable checkbox if there are not secondary taskbars
-                chkAllDisplays.Checked = false;
-                DisableCheckBox(chkAllDisplays);
+                chkSecondary.Checked = false;
+                DisableCheckBox(chkSecondary);
             }
             //Check for new version in background
             bgwCheckVersion.RunWorkerAsync();
@@ -125,7 +124,7 @@ and let me know about this issue. Thanks!",
         {
             //Save the status of the checks to keep the latest option
             Helper.SaveRegValue(REG_CHKNOTIFAREA_STATUS, chkNotifArea.Checked ? "1" : "0");
-            Helper.SaveRegValue(REG_CHKALLLDISPLAYS_STATUS, chkAllDisplays.Checked ? "1" : "0");
+            Helper.SaveRegValue(REG_CHKALLLDISPLAYS_STATUS, chkSecondary.Checked ? "1" : "0");
 
             //Dispose Notify icons because of Windows 10 hack
             if (Helper.IsWindows10 && chkNotifArea.Checked)
@@ -171,7 +170,7 @@ and let me know about this issue. Thanks!",
             if (LatestVersion != null && LatestVersion != string.Empty)
             {
                 lnkNewVersion.Text = $"⚠ New version {LatestVersion} available! Click here to download...";
-                lnkNewVersion.LinkArea = new LinkArea(0, lnkNewVersion.Text.Length-1);    //All the text except the icon is a link
+                lnkNewVersion.LinkArea = new LinkArea(0, lnkNewVersion.Text.Length);
                 lnkNewVersion.Visible = true;
             }
         }
@@ -184,6 +183,12 @@ and let me know about this issue. Thanks!",
         private void notifyIcon_Click(object sender, EventArgs e)
         {
             this.Show();
+        }
+
+        private void cmdAbout_Click(object sender, EventArgs e)
+        {
+            About about = new About();
+            about.ShowDialog(this);
         }
     }
 }

@@ -6,7 +6,8 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Win11ClockToggler")]
-[assembly: AssemblyDescription("Turns off or on the clock (and sys icons) on the toolbar in Windows 11")]
+[assembly: AssemblyDescription(@"Turns off the clock (and system icons), and the notification area on the toolbar in Windows 11.
+Works with Windows 10 too, although is mainly aimed at Windows 11.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("jmalarcon")]
 [assembly: AssemblyProduct("Win11ClockToggler")]
