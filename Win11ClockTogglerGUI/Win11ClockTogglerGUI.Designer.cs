@@ -103,7 +103,6 @@
             // 
             // chkSecondary
             // 
-            this.chkSecondary.Checked = true;
             this.chkSecondary.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chkSecondary.Location = new System.Drawing.Point(54, 11);
             this.chkSecondary.Name = "chkSecondary";
@@ -179,7 +178,6 @@
             // 
             // chkNotifArea
             // 
-            this.chkNotifArea.Checked = true;
             this.chkNotifArea.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chkNotifArea.Location = new System.Drawing.Point(54, 11);
             this.chkNotifArea.Name = "chkNotifArea";
