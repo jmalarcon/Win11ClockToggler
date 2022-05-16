@@ -66,7 +66,7 @@ namespace Win11ClockTogglerGUI
                         CurrentMonitoredControls.AddRange(Helper.GetNotificationAreaHWnds());   //It's a different list depending on the Windows version
                     tmrShowMonitor.Enabled = true;
                     //Add notification icon (hack in Win10 to be able to restore the real width of the taskbar when showing it again)
-                    if (Helper.IsWindows10 && chkNotifArea.Checked)
+                    if (Helper.IsWindows10)
                         notifyIcon.Visible = true;
                     break;
                 case Helper.SWOperation.Show:
@@ -77,7 +77,7 @@ namespace Win11ClockTogglerGUI
                     tmrShowMonitor.Enabled = false;
                     CurrentMonitoredControls = new List<IntPtr>();
                     //This is a hack: dispose the notification icon (although it's not visible) to force a redraw of the notification area in Windows 10
-                    if (Helper.IsWindows10 && chkNotifArea.Checked)
+                    if (Helper.IsWindows10)
                         notifyIcon.Visible = false;
                     break;
                 default:  //Controls can't be found: something has changed in the underlying structure: notify
