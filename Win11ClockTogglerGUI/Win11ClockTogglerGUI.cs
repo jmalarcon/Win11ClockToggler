@@ -126,6 +126,9 @@ and let me know about this issue. Thanks!",
             Helper.SaveRegValue(REG_CHKNOTIFAREA_STATUS, chkNotifArea.Checked ? "1" : "0");
             Helper.SaveRegValue(REG_CHKALLLDISPLAYS_STATUS, chkSecondary.Checked ? "1" : "0");
 
+            if (IsDirty)
+                btnHideShow_Click(null, null);
+
             //Dispose Notify icons because of Windows 10 hack
             if (Helper.IsWindows10 && chkNotifArea.Checked)
             {
@@ -136,9 +139,6 @@ and let me know about this issue. Thanks!",
                 }
                 catch { }
             }
-
-            if (IsDirty)
-                btnHideShow_Click(null, null);
         }
 
         //Timer to monitor if the current notification area pops up again because of a new icon or notification
