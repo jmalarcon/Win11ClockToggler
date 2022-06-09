@@ -20,9 +20,6 @@ Works with Windows 10 too, although is mainly aimed at Windows 11.")]
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
-// The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("88eb8c49-1a30-49e2-9081-5efe0f589e2f")]
-
 // Version information for an assembly consists of the following four values:
 //
 //      Major Version
@@ -33,5 +30,5 @@ Works with Windows 10 too, although is mainly aimed at Windows 11.")]
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.0.2.0")]
-[assembly: AssemblyFileVersion("2.0.2.0")]
+[assembly: AssemblyVersion("2.0.3.0")]
+[assembly: AssemblyFileVersion("2.0.3.0")]

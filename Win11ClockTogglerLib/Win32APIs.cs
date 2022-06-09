@@ -6,12 +6,12 @@ using System.Text.RegularExpressions;
 
 namespace Win11ClockToggler
 {
-    internal class Win32APIs
+    internal static class Win32APIs
     {
         //All needed Win32 APIs declarations
         //Documentation: https://docs.microsoft.com/en-us/windows/win32/api/winuser/
 
-        #region Auxiliar constants
+        #region Helper constants
         internal static readonly int SW_HIDE = 0;   //Show control/window
         internal static readonly int SW_SHOW = 0x0005; //Hide control/window
         #endregion
@@ -22,6 +22,16 @@ namespace Win11ClockToggler
         //This function does not perform a case-sensitive search.
         [DllImport("user32.dll", SetLastError = true)]
         internal static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr hWndChildAfter, string className, string windowTitle);
+
+        //Retrieves a handle to the top-level window whose class name and window name match the specified strings.
+        //This function does not search child windows. This function does not perform a case-sensitive search.
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+        //Brings the thread that created the specified window into the foreground and activates the window.
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool SetForegroundWindow(IntPtr hWnd);
 
         //Enumerates all top-level windows on the screen by passing the handle to each window, in turn, to an application-defined callback function.
         //EnumWindows continues until the last top-level window is enumerated or the callback function returns FALSE.
@@ -35,7 +45,7 @@ namespace Win11ClockToggler
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool EnumChildWindows(IntPtr hwndParent, EnumWindowsProc lpEnumFunc, IntPtr lParam);
 
-        //Retrieves the name of the class to which the specified window belong
+        //Retrieves the name of the class to which the specified window belongs
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         private static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
 
@@ -54,7 +64,6 @@ namespace Win11ClockToggler
         [DllImport("winbrand.dll", CharSet = CharSet.Unicode)]
         [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
         internal static extern string BrandingFormatString(string format);
-
 
         #endregion
 

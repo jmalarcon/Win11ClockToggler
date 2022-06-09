@@ -6,8 +6,9 @@ using System.Threading;
 
 namespace Win11ClockToggler
 {
-    public class Helper
+    public static class Helper
     {
+
         //Enum to decide if you want to hide the clock only or the full notification area
         public enum TaskbarElement
         {
@@ -199,6 +200,20 @@ namespace Win11ClockToggler
                 HideControl(hWnd);
             else
                 ShowControl(hWnd);
+        }
+
+        //Finds a Window by its title and brings it Window to the foreground
+        public static void BringWindowToFront(string title)
+        {
+            // Get a handle to the specified application (search Window by title)
+            IntPtr handle = Win32APIs.FindWindow(null, title);
+
+            // If it's found...
+            if (handle != IntPtr.Zero)
+            {
+                //Bring it to the foreground
+                Win32APIs.SetForegroundWindow(handle);
+            }
         }
 
         #endregion
