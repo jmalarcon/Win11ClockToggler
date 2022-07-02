@@ -21,7 +21,6 @@ namespace Win11ClockTogglerGUI
 
         private static int TOGGLE_KEY_ID = 1;
         private static int STEALTH_KEY_ID = 2;
-        private bool IsHidden = false;
 
         public Win11ClockTogglerGUI()
         {
@@ -175,16 +174,15 @@ and let me know about this issue. Thanks!",
 
         private void toggleStealthMode()
         {
-            if (IsHidden)
+            if (Visible)
             {
-                Show();
-                IsHidden = false;
+                Hide();
+                MessageBox.Show("The Win11ClockToggler GUI is now hidden.\nWhenever you want to bring it back, press Win+Shift+F7 again.");
+                
             }
             else
             {
-                Hide();
-                IsHidden = true;
-                MessageBox.Show("The Win11ClockToggler GUI is now hidden.\nWhenever you want to bring it back, press Win+Shift+F7 again.");
+                Show();
             }
         }
 
