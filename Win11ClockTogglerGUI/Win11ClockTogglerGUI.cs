@@ -3,11 +3,14 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using Win11ClockToggler;
+using System.Runtime.InteropServices;
 
 namespace Win11ClockTogglerGUI
 {
     public partial class Win11ClockTogglerGUI : Form
     {
+        [DllImport("user32.dll")]
+        public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
 
         private bool IsDirty = false;
         private List<IntPtr> CurrentMonitoredControls = new List<IntPtr>();
@@ -19,6 +22,12 @@ namespace Win11ClockTogglerGUI
         public Win11ClockTogglerGUI()
         {
             InitializeComponent();
+
+            // Register Toggle hotKey
+            int UniqueHotkeyId = 1;
+            int KeyCode = (int)Keys.F6;
+            int KeyModifiers = 0x008 + 0x004; // Win + Shift
+            RegisterHotKey(this.Handle, UniqueHotkeyId, KeyModifiers, KeyCode);
         }
 
         private void CheckBoxes_Paint(object sender, PaintEventArgs e)
@@ -38,6 +47,21 @@ namespace Win11ClockTogglerGUI
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            // Catch when a HotKey is pressed
+            if (m.Msg == 0x0312)
+            {
+                int id = m.WParam.ToInt32();
+                if (id == 1)
+                {
+                    btnHideShow_Click(null, null);
+                }
+            }
+
+            base.WndProc(ref m);
         }
 
         private void btnHideShow_Click(object sender, EventArgs e)
@@ -110,7 +134,7 @@ and let me know about this issue. Thanks!",
 
             //Check if there are secondary taskbars in secondary windows
             if (!Helper.AreThereSecondaryTaskbars())
-            { 
+            {
                 //Disable checkbox if there are not secondary taskbars
                 chkSecondary.Checked = false;
                 DisableCheckBox(chkSecondary);
