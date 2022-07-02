@@ -19,15 +19,18 @@ namespace Win11ClockTogglerGUI
         private readonly string REG_CHKNOTIFAREA_STATUS = "chkNotifArea_Status";
         private readonly string REG_CHKALLLDISPLAYS_STATUS = "chkAllDisplays_Status";
 
+        private static int TOGGLE_KEY_ID = 1;
+        private static int STEALTH_KEY_ID = 2;
+        private bool IsHidden = false;
+
         public Win11ClockTogglerGUI()
         {
             InitializeComponent();
 
-            // Register Toggle hotKey
-            int UniqueHotkeyId = 1;
-            int KeyCode = (int)Keys.F6;
+            // Register hotkeys
             int KeyModifiers = 0x008 + 0x004; // Win + Shift
-            RegisterHotKey(this.Handle, UniqueHotkeyId, KeyModifiers, KeyCode);
+            RegisterHotKey(this.Handle, TOGGLE_KEY_ID, KeyModifiers, (int)Keys.F6);
+            RegisterHotKey(this.Handle, STEALTH_KEY_ID, KeyModifiers, (int)Keys.F7);
         }
 
         private void CheckBoxes_Paint(object sender, PaintEventArgs e)
@@ -51,13 +54,18 @@ namespace Win11ClockTogglerGUI
 
         protected override void WndProc(ref Message m)
         {
-            // Catch when a HotKey is pressed
+            // Catch the WM_HOTKEY message to handle any hotkeys being pressed
+            // https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-hotkey
             if (m.Msg == 0x0312)
             {
                 int id = m.WParam.ToInt32();
-                if (id == 1)
+                if (id == TOGGLE_KEY_ID) 
                 {
                     btnHideShow_Click(null, null);
+                }
+                else if (id == STEALTH_KEY_ID) 
+                {
+                    toggleStealthMode();
                 }
             }
 
@@ -162,6 +170,21 @@ and let me know about this issue. Thanks!",
                     notifyIcon.Dispose();
                 }
                 catch { }
+            }
+        }
+
+        private void toggleStealthMode()
+        {
+            if (IsHidden)
+            {
+                Show();
+                IsHidden = false;
+            }
+            else
+            {
+                Hide();
+                IsHidden = true;
+                MessageBox.Show("The Win11ClockToggler GUI is now hidden.\nWhenever you want to bring it back, press Win+Shift+F7 again.");
             }
         }
 
