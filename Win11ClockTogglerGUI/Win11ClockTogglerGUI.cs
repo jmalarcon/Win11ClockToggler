@@ -27,9 +27,9 @@ namespace Win11ClockTogglerGUI
             InitializeComponent();
 
             // Register hotkeys
-            int KeyModifiers = 0x008 + 0x004; // Win + Shift
-            RegisterHotKey(this.Handle, TOGGLE_KEY_ID, KeyModifiers, (int)Keys.F6);
-            RegisterHotKey(this.Handle, STEALTH_KEY_ID, KeyModifiers, (int)Keys.F7);
+            int keyModifiers = 0x008 + 0x004; // Win + Shift
+            RegisterHotKey(this.Handle, TOGGLE_KEY_ID, keyModifiers, (int)Keys.F6);
+            RegisterHotKey(this.Handle, STEALTH_KEY_ID, keyModifiers, (int)Keys.F7);
         }
 
         private void CheckBoxes_Paint(object sender, PaintEventArgs e)
@@ -54,6 +54,8 @@ namespace Win11ClockTogglerGUI
         // Process any messages sent to this window
         protected override void WndProc(ref Message m)
         {
+            bool passThroughMsg = true;
+
             // Catch the WM_HOTKEY message to handle any hotkeys being pressed
             // https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-hotkey
             const int WM_HOTKEY = 0x0312;
@@ -79,11 +81,15 @@ namespace Win11ClockTogglerGUI
                 const int SC_MINIMIZE = 0xf020;
                 if (m.WParam.ToInt32() == SC_MINIMIZE)
                 {
+                    passThroughMsg = false; // To prevent the regular minimize behaviour
                     toggleStealthMode(); 
                 }
             }
 
-            base.WndProc(ref m);
+            if (passThroughMsg)
+            {
+                base.WndProc(ref m);
+            }
         }
 
         private void btnHideShow_Click(object sender, EventArgs e)
