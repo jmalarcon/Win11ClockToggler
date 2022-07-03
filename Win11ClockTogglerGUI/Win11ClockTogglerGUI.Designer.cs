@@ -76,6 +76,7 @@
             this.btnHideShow.Size = new System.Drawing.Size(200, 37);
             this.btnHideShow.TabIndex = 4;
             this.btnHideShow.Text = "Toggle visibility";
+            this.toolTipSecondary.SetToolTip(this.btnHideShow, "Toggle visibility of the selected elements\n(global hotkey: Win+Shift+F6)");
             this.btnHideShow.UseVisualStyleBackColor = true;
             this.btnHideShow.Click += new System.EventHandler(this.btnHideShow_Click);
             // 
@@ -272,7 +273,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "Win11ClockTogglerGUI";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -308,4 +308,3 @@
         private System.Windows.Forms.Button cmdAbout;
     }
 }
-
