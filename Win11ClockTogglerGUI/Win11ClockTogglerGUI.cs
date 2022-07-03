@@ -51,11 +51,13 @@ namespace Win11ClockTogglerGUI
             this.Close();
         }
 
+        // Process any messages sent to this window
         protected override void WndProc(ref Message m)
         {
             // Catch the WM_HOTKEY message to handle any hotkeys being pressed
             // https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-hotkey
-            if (m.Msg == 0x0312)
+            const int WM_HOTKEY = 0x0312;
+            if (m.Msg == WM_HOTKEY)
             {
                 int id = m.WParam.ToInt32();
                 if (id == TOGGLE_KEY_ID) 
@@ -67,11 +69,18 @@ namespace Win11ClockTogglerGUI
                     toggleStealthMode();
                 }
             }
-            
-            if (m.Msg == 0x0112)
+
+            // Catch the WM_SYSCOMMAND message
+            // https://docs.microsoft.com/en-us/windows/win32/menurc/wm-syscommand
+            const int WM_SYSCOMMAND = 0x0112;
+            if (m.Msg == WM_SYSCOMMAND)
             {
-                if (m.WParam.ToInt32() == 0xf020)
-                { toggleStealthMode(); }
+                // When the window is being minimized (SC_MINIMIZE)
+                const int SC_MINIMIZE = 0xf020;
+                if (m.WParam.ToInt32() == SC_MINIMIZE)
+                {
+                    toggleStealthMode(); 
+                }
             }
 
             base.WndProc(ref m);
