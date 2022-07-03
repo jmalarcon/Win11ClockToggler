@@ -33,11 +33,13 @@ Notice that Date/Time is disabled and always will be chosen to be hidden, becaus
 
 When you click the `Toggle visibility` button, the selected elements will be hidden and the `Exit` button will change to `Restore & Exit`. This is because, **when you exit the app, everything will be restored back to normal**. The reason for this is that, while the app is running it will **keep monitoring the hidden areas just in case they show up again**. When a new icon is added to the notification area or when a new notification enters, the system makes everything visible again. This app will monitor this events and will instantly hide again what's selected. That's the reason for keeping the app running while you hide those elements.
 
-> The app button is not visible in the toolbar so it's won't be visible while you're recording your screen unless you change tasks. My advice will be to move it to a secondary screen or to a different desktop anyway.
+> **The app is not visible in the toolbar** so it's won't be visible while you're recording your screen unless you use `ALT`+`Tab` or `Windows`+`Tab` change tasks. You can move it to a secondary screen or to a different desktop, but if you **minimize the app or press `Windows`+`Shift`+`F7`** it will go completely hidden (**stealth mode**). Kudos to [@timmolderez](https://github.com/timmolderez) for [adding](https://github.com/jmalarcon/Win11ClockToggler/commit/1716fba34438e275b8d3f36734d46fd499b3ce9e) this feature.
 
-You can toggle visibility just by pressing `ENTER` and leave the app (and restore the visibilities) by pressin `ESC`.
+You can toggle visibility just by pressing `ENTER` and leave the app (and restore the visibilities) by pressing `ESC`.
 
-It will check for new version once a day when you start it, showing a notice that you can click in order to download it:
+> You can toggle visibility by pressing the `Windows`+`Shift`+`F6` global hotkey combination. This works even in stealth mode. Kudos again to @timmolderez.
+
+It will check for new version (once per day maximum) when you start it, showing a notice that you can click in order to download the new version:
 
 ![The new version notice](imgs/gui-03.png)
 

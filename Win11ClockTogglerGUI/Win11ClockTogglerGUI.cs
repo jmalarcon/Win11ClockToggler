@@ -9,8 +9,13 @@ namespace Win11ClockTogglerGUI
 {
     public partial class Win11ClockTogglerGUI : Form
     {
+        //Allows to register HotKeys globally in Windows (not included in Win11ClockTogglerLib 
+        //because is specific to this app, and not the CLI one)
         [DllImport("user32.dll")]
         public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
+        // Catch the WM_HOTKEY message to handle any hotkeys being pressed
+        // https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-hotkey
+        const int WM_HOTKEY = 0x0312;
 
         private bool IsDirty = false;
         private List<IntPtr> CurrentMonitoredControls = new List<IntPtr>();
@@ -18,7 +23,7 @@ namespace Win11ClockTogglerGUI
         //Registry keys to save the latest status of the checks
         private readonly string REG_CHKNOTIFAREA_STATUS = "chkNotifArea_Status";
         private readonly string REG_CHKALLLDISPLAYS_STATUS = "chkAllDisplays_Status";
-
+        //Internal IDs for the global hot keys (associated with this window)
         private static int TOGGLE_KEY_ID = 1;
         private static int STEALTH_KEY_ID = 2;
 
@@ -56,9 +61,6 @@ namespace Win11ClockTogglerGUI
         {
             bool passThroughMsg = true;
 
-            // Catch the WM_HOTKEY message to handle any hotkeys being pressed
-            // https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-hotkey
-            const int WM_HOTKEY = 0x0312;
             if (m.Msg == WM_HOTKEY)
             {
                 int id = m.WParam.ToInt32();
@@ -135,10 +137,10 @@ namespace Win11ClockTogglerGUI
                 default:  //Controls can't be found: something has changed in the underlying structure: notify
                     MessageBox.Show(@"The notification area and/or the Date/Time controls have not been found.
 
-This program is designed for Windows 11 (and works with Windows 10 too). 
+This program is designed for Windows 11 (although it works with Windows 10 too). 
 
 Maybe you're using a newer version of Windows. 
-Or maybe your version of Windows 11 is newer and the layout of the taskbar has changed.
+Or maybe your version of Windows 11 is newer and the layout for building the taskbar has been changed.
 
 Please, contact me through GitHub (https://github.com/jmalarcon/Win11ClockToggler) 
 and let me know about this issue. Thanks!",
@@ -195,15 +197,16 @@ and let me know about this issue. Thanks!",
 
         private void toggleStealthMode()
         {
-            if (Visible)
+            if (this.Visible)
             {
-                Hide();
-                MessageBox.Show("The Win11ClockToggler window is now completely hidden.\nWhenever you want to bring it back, press Win+Shift+F7.");
-                
+                this.Hide();
+                MessageBox.Show("The Win11ClockToggler window is now completely hidden.\nWhenever you want to bring it back, press Win+Shift+F7.", 
+                    "Windows 11 Date//Time & Notification Area Toggler",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                Show();
+                this.Show();
                 this.WindowState = FormWindowState.Normal;
                 BringToFront();
             }
