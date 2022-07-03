@@ -67,6 +67,12 @@ namespace Win11ClockTogglerGUI
                     toggleStealthMode();
                 }
             }
+            
+            if (m.Msg == 0x0112)
+            {
+                if (m.WParam.ToInt32() == 0xf020)
+                { toggleStealthMode(); }
+            }
 
             base.WndProc(ref m);
         }
@@ -177,12 +183,14 @@ and let me know about this issue. Thanks!",
             if (Visible)
             {
                 Hide();
-                MessageBox.Show("The Win11ClockToggler window is now hidden.\nWhenever you want to bring it back, press Win+Shift+F7 again.");
+                MessageBox.Show("The Win11ClockToggler window is now completely hidden.\nWhenever you want to bring it back, press Win+Shift+F7.");
                 
             }
             else
             {
                 Show();
+                this.WindowState = FormWindowState.Normal;
+                BringToFront();
             }
         }
 
