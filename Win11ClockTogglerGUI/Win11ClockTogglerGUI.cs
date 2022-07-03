@@ -177,7 +177,7 @@ and let me know about this issue. Thanks!",
             if (Visible)
             {
                 Hide();
-                MessageBox.Show("The Win11ClockToggler GUI is now hidden.\nWhenever you want to bring it back, press Win+Shift+F7 again.");
+                MessageBox.Show("The Win11ClockToggler window is now hidden.\nWhenever you want to bring it back, press Win+Shift+F7 again.");
                 
             }
             else

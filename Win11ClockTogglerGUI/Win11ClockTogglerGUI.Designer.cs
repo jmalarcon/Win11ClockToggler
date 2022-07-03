@@ -34,13 +34,10 @@
             this.btnHideShow = new System.Windows.Forms.Button();
             this.pnlCheckBoxes = new System.Windows.Forms.Panel();
             this.pnlSecondary = new System.Windows.Forms.Panel();
-            this.chkSecondary = new JCS.ToggleSwitch();
             this.label2 = new System.Windows.Forms.Label();
             this.pnlDateTime = new System.Windows.Forms.Panel();
-            this.chkDateTime = new JCS.ToggleSwitch();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlNotifArea = new System.Windows.Forms.Panel();
-            this.chkNotifArea = new JCS.ToggleSwitch();
             this.lblNotifArea = new System.Windows.Forms.Label();
             this.tmrShowMonitor = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
@@ -48,6 +45,9 @@
             this.bgwCheckVersion = new System.ComponentModel.BackgroundWorker();
             this.toolTipSecondary = new System.Windows.Forms.ToolTip(this.components);
             this.cmdAbout = new System.Windows.Forms.Button();
+            this.chkSecondary = new JCS.ToggleSwitch();
+            this.chkDateTime = new JCS.ToggleSwitch();
+            this.chkNotifArea = new JCS.ToggleSwitch();
             this.pnlCheckBoxes.SuspendLayout();
             this.pnlSecondary.SuspendLayout();
             this.pnlDateTime.SuspendLayout();
@@ -59,9 +59,10 @@
             this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.Location = new System.Drawing.Point(30, 144);
+            this.btnExit.Location = new System.Drawing.Point(40, 177);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(200, 37);
+            this.btnExit.Size = new System.Drawing.Size(267, 46);
             this.btnExit.TabIndex = 3;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -71,11 +72,13 @@
             // 
             this.btnHideShow.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnHideShow.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHideShow.Location = new System.Drawing.Point(454, 144);
+            this.btnHideShow.Location = new System.Drawing.Point(605, 177);
+            this.btnHideShow.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnHideShow.Name = "btnHideShow";
-            this.btnHideShow.Size = new System.Drawing.Size(200, 37);
+            this.btnHideShow.Size = new System.Drawing.Size(267, 46);
             this.btnHideShow.TabIndex = 4;
             this.btnHideShow.Text = "Toggle visibility";
+            this.toolTipSecondary.SetToolTip(this.btnHideShow, "Toggle visibility of the selected elements\n(global hotkey: Win+Shift+F6)");
             this.btnHideShow.UseVisualStyleBackColor = true;
             this.btnHideShow.Click += new System.EventHandler(this.btnHideShow_Click);
             // 
@@ -84,9 +87,10 @@
             this.pnlCheckBoxes.Controls.Add(this.pnlSecondary);
             this.pnlCheckBoxes.Controls.Add(this.pnlDateTime);
             this.pnlCheckBoxes.Controls.Add(this.pnlNotifArea);
-            this.pnlCheckBoxes.Location = new System.Drawing.Point(13, 13);
+            this.pnlCheckBoxes.Location = new System.Drawing.Point(17, 16);
+            this.pnlCheckBoxes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlCheckBoxes.Name = "pnlCheckBoxes";
-            this.pnlCheckBoxes.Size = new System.Drawing.Size(658, 77);
+            this.pnlCheckBoxes.Size = new System.Drawing.Size(877, 95);
             this.pnlCheckBoxes.TabIndex = 5;
             // 
             // pnlSecondary
@@ -94,36 +98,22 @@
             this.pnlSecondary.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.pnlSecondary.Controls.Add(this.chkSecondary);
             this.pnlSecondary.Controls.Add(this.label2);
-            this.pnlSecondary.Location = new System.Drawing.Point(441, 3);
+            this.pnlSecondary.Location = new System.Drawing.Point(588, 4);
+            this.pnlSecondary.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlSecondary.Name = "pnlSecondary";
-            this.pnlSecondary.Size = new System.Drawing.Size(200, 70);
+            this.pnlSecondary.Size = new System.Drawing.Size(267, 86);
             this.pnlSecondary.TabIndex = 9;
             this.toolTipSecondary.SetToolTip(this.pnlSecondary, "Shows or hides Date/Time in secondary toolbars\r\n(in secondary screens if they exi" +
-        "st)");
-            // 
-            // chkSecondary
-            // 
-            this.chkSecondary.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chkSecondary.Location = new System.Drawing.Point(54, 11);
-            this.chkSecondary.Name = "chkSecondary";
-            this.chkSecondary.OffFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkSecondary.OffText = "SHOW";
-            this.chkSecondary.OnFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkSecondary.OnForeColor = System.Drawing.Color.White;
-            this.chkSecondary.OnText = "HIDE";
-            this.chkSecondary.Size = new System.Drawing.Size(94, 21);
-            this.chkSecondary.Style = JCS.ToggleSwitch.ToggleSwitchStyle.Iphone;
-            this.chkSecondary.TabIndex = 6;
-            this.toolTipSecondary.SetToolTip(this.chkSecondary, "Shows or hides Date/Time in secondary toolbars\r\n(in secondary screens if they exi" +
         "st)");
             // 
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 38);
+            this.label2.Location = new System.Drawing.Point(4, 47);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(194, 29);
+            this.label2.Size = new System.Drawing.Size(259, 36);
             this.label2.TabIndex = 8;
             this.label2.Text = "Secondary";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -135,33 +125,20 @@
             this.pnlDateTime.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.pnlDateTime.Controls.Add(this.chkDateTime);
             this.pnlDateTime.Controls.Add(this.label1);
-            this.pnlDateTime.Location = new System.Drawing.Point(17, 3);
+            this.pnlDateTime.Location = new System.Drawing.Point(23, 4);
+            this.pnlDateTime.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlDateTime.Name = "pnlDateTime";
-            this.pnlDateTime.Size = new System.Drawing.Size(200, 70);
+            this.pnlDateTime.Size = new System.Drawing.Size(267, 86);
             this.pnlDateTime.TabIndex = 9;
-            // 
-            // chkDateTime
-            // 
-            this.chkDateTime.Checked = true;
-            this.chkDateTime.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chkDateTime.Location = new System.Drawing.Point(54, 11);
-            this.chkDateTime.Name = "chkDateTime";
-            this.chkDateTime.OffFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDateTime.OffText = "SHOW";
-            this.chkDateTime.OnFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDateTime.OnForeColor = System.Drawing.Color.White;
-            this.chkDateTime.OnText = "HIDE";
-            this.chkDateTime.Size = new System.Drawing.Size(94, 21);
-            this.chkDateTime.Style = JCS.ToggleSwitch.ToggleSwitchStyle.Iphone;
-            this.chkDateTime.TabIndex = 6;
             // 
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 38);
+            this.label1.Location = new System.Drawing.Point(4, 47);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(194, 29);
+            this.label1.Size = new System.Drawing.Size(259, 36);
             this.label1.TabIndex = 8;
             this.label1.Text = "Date/Time";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -171,32 +148,20 @@
             this.pnlNotifArea.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.pnlNotifArea.Controls.Add(this.chkNotifArea);
             this.pnlNotifArea.Controls.Add(this.lblNotifArea);
-            this.pnlNotifArea.Location = new System.Drawing.Point(230, 3);
+            this.pnlNotifArea.Location = new System.Drawing.Point(307, 4);
+            this.pnlNotifArea.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlNotifArea.Name = "pnlNotifArea";
-            this.pnlNotifArea.Size = new System.Drawing.Size(200, 70);
+            this.pnlNotifArea.Size = new System.Drawing.Size(267, 86);
             this.pnlNotifArea.TabIndex = 8;
-            // 
-            // chkNotifArea
-            // 
-            this.chkNotifArea.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chkNotifArea.Location = new System.Drawing.Point(54, 11);
-            this.chkNotifArea.Name = "chkNotifArea";
-            this.chkNotifArea.OffFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkNotifArea.OffText = "SHOW";
-            this.chkNotifArea.OnFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkNotifArea.OnForeColor = System.Drawing.Color.White;
-            this.chkNotifArea.OnText = "HIDE";
-            this.chkNotifArea.Size = new System.Drawing.Size(94, 21);
-            this.chkNotifArea.Style = JCS.ToggleSwitch.ToggleSwitchStyle.Iphone;
-            this.chkNotifArea.TabIndex = 6;
             // 
             // lblNotifArea
             // 
             this.lblNotifArea.BackColor = System.Drawing.Color.Transparent;
             this.lblNotifArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotifArea.Location = new System.Drawing.Point(3, 38);
+            this.lblNotifArea.Location = new System.Drawing.Point(4, 47);
+            this.lblNotifArea.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNotifArea.Name = "lblNotifArea";
-            this.lblNotifArea.Size = new System.Drawing.Size(194, 29);
+            this.lblNotifArea.Size = new System.Drawing.Size(259, 36);
             this.lblNotifArea.TabIndex = 8;
             this.lblNotifArea.Text = "Notification Area";
             this.lblNotifArea.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -219,9 +184,10 @@
             this.lnkNewVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lnkNewVersion.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkNewVersion.LinkColor = System.Drawing.Color.Red;
-            this.lnkNewVersion.Location = new System.Drawing.Point(13, 99);
+            this.lnkNewVersion.Location = new System.Drawing.Point(17, 122);
+            this.lnkNewVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkNewVersion.Name = "lnkNewVersion";
-            this.lnkNewVersion.Size = new System.Drawing.Size(658, 30);
+            this.lnkNewVersion.Size = new System.Drawing.Size(877, 37);
             this.lnkNewVersion.TabIndex = 7;
             this.lnkNewVersion.TabStop = true;
             this.lnkNewVersion.Text = "⚠ New version 2.0.0 available! Click here to download...";
@@ -248,22 +214,71 @@
             this.cmdAbout.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmdAbout.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cmdAbout.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdAbout.Location = new System.Drawing.Point(243, 144);
+            this.cmdAbout.Location = new System.Drawing.Point(324, 177);
+            this.cmdAbout.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmdAbout.Name = "cmdAbout";
-            this.cmdAbout.Size = new System.Drawing.Size(200, 37);
+            this.cmdAbout.Size = new System.Drawing.Size(267, 46);
             this.cmdAbout.TabIndex = 8;
             this.cmdAbout.Text = "About";
             this.cmdAbout.UseVisualStyleBackColor = true;
             this.cmdAbout.Click += new System.EventHandler(this.cmdAbout_Click);
             // 
+            // chkSecondary
+            // 
+            this.chkSecondary.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chkSecondary.Location = new System.Drawing.Point(72, 14);
+            this.chkSecondary.Margin = new System.Windows.Forms.Padding(4);
+            this.chkSecondary.Name = "chkSecondary";
+            this.chkSecondary.OffFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkSecondary.OffText = "SHOW";
+            this.chkSecondary.OnFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkSecondary.OnForeColor = System.Drawing.Color.White;
+            this.chkSecondary.OnText = "HIDE";
+            this.chkSecondary.Size = new System.Drawing.Size(125, 26);
+            this.chkSecondary.Style = JCS.ToggleSwitch.ToggleSwitchStyle.Iphone;
+            this.chkSecondary.TabIndex = 6;
+            this.toolTipSecondary.SetToolTip(this.chkSecondary, "Shows or hides Date/Time in secondary toolbars\r\n(in secondary screens if they exi" +
+        "st)");
+            // 
+            // chkDateTime
+            // 
+            this.chkDateTime.Checked = true;
+            this.chkDateTime.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chkDateTime.Location = new System.Drawing.Point(72, 14);
+            this.chkDateTime.Margin = new System.Windows.Forms.Padding(4);
+            this.chkDateTime.Name = "chkDateTime";
+            this.chkDateTime.OffFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDateTime.OffText = "SHOW";
+            this.chkDateTime.OnFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDateTime.OnForeColor = System.Drawing.Color.White;
+            this.chkDateTime.OnText = "HIDE";
+            this.chkDateTime.Size = new System.Drawing.Size(125, 26);
+            this.chkDateTime.Style = JCS.ToggleSwitch.ToggleSwitchStyle.Iphone;
+            this.chkDateTime.TabIndex = 6;
+            // 
+            // chkNotifArea
+            // 
+            this.chkNotifArea.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chkNotifArea.Location = new System.Drawing.Point(72, 14);
+            this.chkNotifArea.Margin = new System.Windows.Forms.Padding(4);
+            this.chkNotifArea.Name = "chkNotifArea";
+            this.chkNotifArea.OffFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkNotifArea.OffText = "SHOW";
+            this.chkNotifArea.OnFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkNotifArea.OnForeColor = System.Drawing.Color.White;
+            this.chkNotifArea.OnText = "HIDE";
+            this.chkNotifArea.Size = new System.Drawing.Size(125, 26);
+            this.chkNotifArea.Style = JCS.ToggleSwitch.ToggleSwitchStyle.Iphone;
+            this.chkNotifArea.TabIndex = 6;
+            // 
             // Win11ClockTogglerGUI
             // 
             this.AcceptButton = this.btnHideShow;
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnExit;
-            this.ClientSize = new System.Drawing.Size(683, 193);
+            this.ClientSize = new System.Drawing.Size(911, 238);
             this.Controls.Add(this.cmdAbout);
             this.Controls.Add(this.lnkNewVersion);
             this.Controls.Add(this.btnHideShow);
@@ -271,6 +286,7 @@
             this.Controls.Add(this.pnlCheckBoxes);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Win11ClockTogglerGUI";
