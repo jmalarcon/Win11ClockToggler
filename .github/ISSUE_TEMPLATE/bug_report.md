@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Create a report to help me improve
+about: Open an issue if you think you've found a bug. For questions, ideas and others, go to the `Discussions` section of this repo.
 title: "[BUG]"
 labels: bug
 assignees: jmalarcon
