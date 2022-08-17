@@ -72,7 +72,7 @@ namespace Win11ClockToggler
                     List<IntPtr> elementsToToggle = GetNotificationAreaHWnds();
                     if (elementsToToggle.Count > 0)
                     {
-                        elementsToToggle.ForEach(elt => 
+                        elementsToToggle.ForEach(elt =>
                         {
                             //Change the visibility accordingly for each element (to be coherent with the main operation with the clock)
                             if (Win32APIs.IsWindowVisible(elt))

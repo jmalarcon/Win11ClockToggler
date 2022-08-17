@@ -14,7 +14,7 @@ namespace JCS
         #region Constructor
 
         protected ToggleSwitchRendererBase()
-        {}
+        { }
 
         internal void SetToggleSwitch(ToggleSwitch toggleSwitch)
         {

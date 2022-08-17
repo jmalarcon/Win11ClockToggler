@@ -172,7 +172,7 @@
             this.pnlNotifArea.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.pnlNotifArea.Controls.Add(this.chkNotifArea);
             this.pnlNotifArea.Controls.Add(this.lblNotifArea);
-            this.pnlNotifArea.Location = new System.Drawing.Point(230, 3);
+            this.pnlNotifArea.Location = new System.Drawing.Point(229, 3);
             this.pnlNotifArea.Name = "pnlNotifArea";
             this.pnlNotifArea.Size = new System.Drawing.Size(200, 70);
             this.pnlNotifArea.TabIndex = 8;
@@ -220,7 +220,7 @@
             this.lnkNewVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lnkNewVersion.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkNewVersion.LinkColor = System.Drawing.Color.Red;
-            this.lnkNewVersion.Location = new System.Drawing.Point(13, 99);
+            this.lnkNewVersion.Location = new System.Drawing.Point(13, 102);
             this.lnkNewVersion.Name = "lnkNewVersion";
             this.lnkNewVersion.Size = new System.Drawing.Size(658, 30);
             this.lnkNewVersion.TabIndex = 7;
@@ -249,7 +249,7 @@
             this.cmdAbout.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmdAbout.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cmdAbout.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdAbout.Location = new System.Drawing.Point(243, 144);
+            this.cmdAbout.Location = new System.Drawing.Point(242, 144);
             this.cmdAbout.Name = "cmdAbout";
             this.cmdAbout.Size = new System.Drawing.Size(200, 37);
             this.cmdAbout.TabIndex = 8;

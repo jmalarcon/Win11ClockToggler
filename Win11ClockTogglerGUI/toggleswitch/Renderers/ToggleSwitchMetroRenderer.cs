@@ -140,11 +140,11 @@ namespace JCS
 
                         if (ToggleSwitch.OnSideAlignment == ToggleSwitch.ToggleSwitchAlignment.Center)
                         {
-                            textXPos = (float) fullRectangle.X + (((float) fullRectangle.Width - (float) textSize.Width)/2);
+                            textXPos = (float)fullRectangle.X + (((float)fullRectangle.Width - (float)textSize.Width) / 2);
                         }
                         else if (ToggleSwitch.OnSideAlignment == ToggleSwitch.ToggleSwitchAlignment.Near)
                         {
-                            textXPos = (float) fullRectangle.X + (float)fullRectangle.Width - (float) textSize.Width;
+                            textXPos = (float)fullRectangle.X + (float)fullRectangle.Width - (float)textSize.Width;
                         }
 
                         RectangleF textRectangle = new RectangleF(textXPos, (float)fullRectangle.Y + (((float)fullRectangle.Height - (float)textSize.Height) / 2), textSize.Width, textSize.Height);

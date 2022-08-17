@@ -108,7 +108,7 @@ namespace JCS
             g.SetClip(controlRectangle);
 
             int fullCathetusLength = GetCathetusLengthBasedOnAngle();
-            int dblFullCathetusLength = 2*fullCathetusLength;
+            int dblFullCathetusLength = 2 * fullCathetusLength;
 
             Point[] polygonPoints = new Point[4];
 
@@ -165,7 +165,7 @@ namespace JCS
                     int imageXPos = (int)adjustedButtonRect.X;
 
                     bool scaleImage = ToggleSwitch.ButtonImage != null ? ToggleSwitch.ButtonScaleImageToFit : (ToggleSwitch.Checked ? ToggleSwitch.OnButtonScaleImageToFit : ToggleSwitch.OffButtonScaleImageToFit);
-                    
+
                     if (scaleImage)
                     {
                         Size canvasSize = adjustedButtonRect.Size;
@@ -255,7 +255,7 @@ namespace JCS
 
             double degrees = Math.Abs(SlantAngle);
             double radians = degrees * (Math.PI / 180);
-            double length = Math.Tan(radians)*ToggleSwitch.Height;
+            double length = Math.Tan(radians) * ToggleSwitch.Height;
 
             return (int)length;
         }
@@ -275,7 +275,7 @@ namespace JCS
         public override int GetButtonWidth()
         {
             double buttonWidth = (double)ToggleSwitch.Width / 2;
-            return (int) buttonWidth;
+            return (int)buttonWidth;
         }
 
         public override Rectangle GetButtonRectangle()

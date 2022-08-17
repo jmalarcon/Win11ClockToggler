@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace Win11ClockToggler

@@ -37,7 +37,7 @@ namespace Win11ClockToggler
                 return string.Empty;
 
             string latestV = VersionChecker.GetLatestVersionFromGitHub("jmalarcon", "Win11ClockToggler");
-            
+
             //Failed to get the latest version
             if (latestV == null) return null;
 

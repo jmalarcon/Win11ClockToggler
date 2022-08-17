@@ -9,7 +9,7 @@ namespace Win11ClockToggler
             if (IsModifierOn(args, "help"))
             {
                 Console.WriteLine(helpStr);
-                Console.ReadKey(); 
+                Console.ReadKey();
                 return;
             }
 
@@ -95,7 +95,7 @@ namespace Win11ClockToggler
             argName = argName.Trim().ToLower();
             foreach (string arg in args)
             {
-                if (arg == "-"+ argName.Substring(0,1) || arg == "/" + argName.Substring(0, 1) || arg == "--" + argName)
+                if (arg == "-" + argName.Substring(0, 1) || arg == "/" + argName.Substring(0, 1) || arg == "--" + argName)
                     return true;
             }
             return false;

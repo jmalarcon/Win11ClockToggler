@@ -77,7 +77,7 @@ namespace JCS
         public Color ArrowPressedColor { get; set; }
         public Color ButtonShadowColor1 { get; set; }
         public Color ButtonShadowColor2 { get; set; }
-        
+
         public int ButtonShadowWidth { get; set; }
         public int CornerRadius { get; set; }
         public int ButtonCornerRadius { get; set; }
@@ -122,7 +122,7 @@ namespace JCS
                     g.FillPath(borderBrush, innerBorderPath);
                 }
 
-                g.ResetClip();    
+                g.ResetClip();
             }
 
             Rectangle backgroundRectangle = new Rectangle(borderRectangle.X + 2, borderRectangle.Y + 2, borderRectangle.Width - 4, borderRectangle.Height - 4);
@@ -541,7 +541,7 @@ namespace JCS
         public GraphicsPath GetRoundedRectanglePath(Rectangle rectangle, int radius)
         {
             GraphicsPath gp = new GraphicsPath();
-            int diameter = 2*radius;
+            int diameter = 2 * radius;
 
             if (diameter > ToggleSwitch.Height)
                 diameter = ToggleSwitch.Height;
@@ -564,7 +564,7 @@ namespace JCS
 
             Point top = new Point(arrowRectangle.X + 8, arrowRectangle.Y);
             Point bottom = new Point(arrowRectangle.X + 8, arrowRectangle.Y + arrowRectangle.Height);
-            Point tip = new Point(arrowRectangle.X, arrowRectangle.Y + (arrowRectangle.Height/2));
+            Point tip = new Point(arrowRectangle.X, arrowRectangle.Y + (arrowRectangle.Height / 2));
 
             gp.AddLine(top, bottom);
             gp.AddLine(bottom, tip);
@@ -590,8 +590,8 @@ namespace JCS
 
         public override int GetButtonWidth()
         {
-            float buttonWidth = 1.41f*ToggleSwitch.Height;
-            return (int) buttonWidth;
+            float buttonWidth = 1.41f * ToggleSwitch.Height;
+            return (int)buttonWidth;
         }
 
         public override Rectangle GetButtonRectangle()

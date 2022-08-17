@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
 using System.Collections.Generic;
-using Win11ClockToggler;
+using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
+using Win11ClockToggler;
 
 namespace Win11ClockTogglerGUI
 {
@@ -64,11 +64,11 @@ namespace Win11ClockTogglerGUI
             if (m.Msg == WM_HOTKEY)
             {
                 int id = m.WParam.ToInt32();
-                if (id == TOGGLE_KEY_ID) 
+                if (id == TOGGLE_KEY_ID)
                 {
                     btnHideShow_Click(null, null);
                 }
-                else if (id == STEALTH_KEY_ID) 
+                else if (id == STEALTH_KEY_ID)
                 {
                     toggleStealthMode();
                 }
@@ -84,7 +84,7 @@ namespace Win11ClockTogglerGUI
                 if (m.WParam.ToInt32() == SC_MINIMIZE)
                 {
                     passThroughMsg = false; // To prevent the regular minimize behaviour
-                    toggleStealthMode(); 
+                    toggleStealthMode();
                 }
             }
 
@@ -200,7 +200,7 @@ and let me know about this issue. Thanks!",
             if (this.Visible)
             {
                 this.Hide();
-                MessageBox.Show("The Win11ClockToggler window is now completely hidden.\nWhenever you want to bring it back, press Win+Shift+F7.", 
+                MessageBox.Show("The Win11ClockToggler window is now completely hidden.\nWhenever you want to bring it back, press Win+Shift+F7.",
                     "Windows 11 Date//Time & Notification Area Toggler",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

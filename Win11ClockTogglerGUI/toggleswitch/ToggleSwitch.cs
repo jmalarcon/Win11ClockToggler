@@ -621,7 +621,7 @@ namespace JCS
                 }
             }
         }
-        
+
         [Bindable(false)]
         [DefaultValue(null)]
         [Category("Appearance")]
@@ -941,7 +941,7 @@ namespace JCS
 
             int buttonWidth = _renderer.GetButtonWidth();
             Rectangle buttonRectangle = _renderer.GetButtonRectangle(buttonWidth);
-            
+
             _savedButtonValue = ButtonValue;
 
             if (buttonRectangle.Contains(e.Location))
@@ -990,7 +990,7 @@ namespace JCS
 
             if (_moving)
             {
-                int percentage = (int)((100*(double)ButtonValue)/((double) Width - (double) buttonWidth));
+                int percentage = (int)((100 * (double)ButtonValue) / ((double)Width - (double)buttonWidth));
 
                 if (_checked)
                 {
@@ -1087,7 +1087,7 @@ namespace JCS
                 int buttonWidth = _renderer.GetButtonWidth();
                 _animationTarget = Width - buttonWidth;
             }
-            
+
             base.OnSizeChanged(e);
         }
 
@@ -1120,7 +1120,7 @@ namespace JCS
             }
             else
             {
-                AnimationComplete();       
+                AnimationComplete();
             }
         }
 
