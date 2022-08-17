@@ -69,7 +69,7 @@ namespace JCS
                     g.FillPath(borderBrush, outerControlPath);
                 }
 
-                g.ResetClip();    
+                g.ResetClip();
             }
 
             //Draw inner background
@@ -97,7 +97,7 @@ namespace JCS
                     g.FillRectangle(shadowBrush, upperShadowRectangle);
                 }
 
-                g.ResetClip();    
+                g.ResetClip();
             }
         }
 
@@ -295,7 +295,7 @@ namespace JCS
                     }
                 }
 
-                g.ResetClip();    
+                g.ResetClip();
             }
         }
 
@@ -324,7 +324,7 @@ namespace JCS
             }
 
             //Draw "metal" surface
-            PointF centerPoint1 = new PointF(buttonRectangle.X + (buttonRectangle.Width / 2f), buttonRectangle.Y + 1.2f*(buttonRectangle.Height / 2f));
+            PointF centerPoint1 = new PointF(buttonRectangle.X + (buttonRectangle.Width / 2f), buttonRectangle.Y + 1.2f * (buttonRectangle.Height / 2f));
 
             using (PathGradientBrush firstMetalBrush = GetBrush(new Color[]
                                                                   {
@@ -336,7 +336,7 @@ namespace JCS
                 g.FillEllipse(firstMetalBrush, buttonRectangle);
             }
 
-            PointF centerPoint2 = new PointF(buttonRectangle.X + 0.8f*(buttonRectangle.Width / 2f), buttonRectangle.Y + (buttonRectangle.Height / 2f));
+            PointF centerPoint2 = new PointF(buttonRectangle.X + 0.8f * (buttonRectangle.Width / 2f), buttonRectangle.Y + (buttonRectangle.Height / 2f));
 
             using (PathGradientBrush secondMetalBrush = GetBrush(new Color[]
                                                                   {
@@ -348,7 +348,7 @@ namespace JCS
                 g.FillEllipse(secondMetalBrush, buttonRectangle);
             }
 
-            PointF centerPoint3 = new PointF(buttonRectangle.X + 1.2f*(buttonRectangle.Width / 2f), buttonRectangle.Y + (buttonRectangle.Height / 2f));
+            PointF centerPoint3 = new PointF(buttonRectangle.X + 1.2f * (buttonRectangle.Width / 2f), buttonRectangle.Y + (buttonRectangle.Height / 2f));
 
             using (PathGradientBrush thirdMetalBrush = GetBrush(new Color[]
                                                                   {
@@ -360,7 +360,7 @@ namespace JCS
                 g.FillEllipse(thirdMetalBrush, buttonRectangle);
             }
 
-            PointF centerPoint4 = new PointF(buttonRectangle.X + 0.9f*(buttonRectangle.Width / 2f), buttonRectangle.Y + 0.9f*(buttonRectangle.Height / 2f));
+            PointF centerPoint4 = new PointF(buttonRectangle.X + 0.9f * (buttonRectangle.Width / 2f), buttonRectangle.Y + 0.9f * (buttonRectangle.Height / 2f));
 
             using (PathGradientBrush fourthMetalBrush = GetBrush(new Color[]
                                                                   {
@@ -387,7 +387,7 @@ namespace JCS
             {
                 g.DrawEllipse(buttonBorderPen, buttonRectangle);
             }
-            
+
             g.ResetClip();
         }
 

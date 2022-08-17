@@ -88,7 +88,7 @@ namespace JCS
 
             //Draw upper gradient field
             int gradientRectWidth = leftRectangle.Width + buttonWidth / 2;
-            int upperGradientRectHeight = (int)((double)0.8*(double)(leftRectangle.Height - 2));
+            int upperGradientRectHeight = (int)((double)0.8 * (double)(leftRectangle.Height - 2));
 
             Rectangle controlRectangle = new Rectangle(0, 0, ToggleSwitch.Width, ToggleSwitch.Height);
             GraphicsPath controlClipPath = GetControlClipPath(controlRectangle);
@@ -126,10 +126,10 @@ namespace JCS
 
             using (GraphicsPath lowerGradientPath = new GraphicsPath())
             {
-                lowerGradientPath.AddArc(1, lowerGradientRectangle.Y, (int) (0.75*(ToggleSwitch.Height - 1)), ToggleSwitch.Height - 1, 215, 45); //Arc from side to top
-                lowerGradientPath.AddLine(lowerGradientRectangle.X + buttonWidth/2, lowerGradientRectangle.Y, lowerGradientRectangle.X + lowerGradientRectangle.Width, lowerGradientRectangle.Y);
+                lowerGradientPath.AddArc(1, lowerGradientRectangle.Y, (int)(0.75 * (ToggleSwitch.Height - 1)), ToggleSwitch.Height - 1, 215, 45); //Arc from side to top
+                lowerGradientPath.AddLine(lowerGradientRectangle.X + buttonWidth / 2, lowerGradientRectangle.Y, lowerGradientRectangle.X + lowerGradientRectangle.Width, lowerGradientRectangle.Y);
                 lowerGradientPath.AddLine(lowerGradientRectangle.X + lowerGradientRectangle.Width, lowerGradientRectangle.Y, lowerGradientRectangle.X + lowerGradientRectangle.Width, lowerGradientRectangle.Y + lowerGradientRectangle.Height);
-                lowerGradientPath.AddLine(lowerGradientRectangle.X + buttonWidth/4, lowerGradientRectangle.Y + lowerGradientRectangle.Height, lowerGradientRectangle.X + lowerGradientRectangle.Width, lowerGradientRectangle.Y + lowerGradientRectangle.Height);
+                lowerGradientPath.AddLine(lowerGradientRectangle.X + buttonWidth / 4, lowerGradientRectangle.Y + lowerGradientRectangle.Height, lowerGradientRectangle.X + lowerGradientRectangle.Width, lowerGradientRectangle.Y + lowerGradientRectangle.Height);
                 lowerGradientPath.AddArc(1, 1, ToggleSwitch.Height - 1, ToggleSwitch.Height - 1, 90, 70); //Arc from side to bottom
 
                 Color lowerColor1 = (!ToggleSwitch.Enabled && ToggleSwitch.GrayWhenDisabled) ? LeftSideLowerColor1.ToGrayScale() : LeftSideLowerColor1;
@@ -269,7 +269,7 @@ namespace JCS
             //Draw upper gradient field
             int gradientRectWidth = rightRectangle.Width + buttonRectangle.Width / 2;
             int upperGradientRectHeight = (int)((double)0.8 * (double)(rightRectangle.Height - 2));
-            
+
             Rectangle upperGradientRectangle = new Rectangle(rightRectangle.X - buttonRectangle.Width / 2, rightRectangle.Y + 1, gradientRectWidth - 1, upperGradientRectHeight - 1);
 
             g.SetClip(controlClipPath);
@@ -295,7 +295,7 @@ namespace JCS
 
             //Draw lower gradient field
             int lowerGradientRectHeight = (int)Math.Ceiling((double)0.5 * (double)(rightRectangle.Height - 2));
-            
+
             Rectangle lowerGradientRectangle = new Rectangle(rightRectangle.X - buttonRectangle.Width / 2, rightRectangle.Y + (rightRectangle.Height / 2), gradientRectWidth - 1, lowerGradientRectHeight);
 
             g.SetClip(controlClipPath);
@@ -586,7 +586,7 @@ namespace JCS
                     imageRectangle = new Rectangle(imageXPos, (int)((float)buttonRectangle.Y + (((float)buttonRectangle.Height - (float)resizedImageSize.Height) / 2)), resizedImageSize.Width, resizedImageSize.Height);
 
                     if (!ToggleSwitch.Enabled && ToggleSwitch.GrayWhenDisabled)
-                        g.DrawImage(buttonImage, imageRectangle, 0,0, buttonImage.Width, buttonImage.Height, GraphicsUnit.Pixel, ImageHelper.GetGrayscaleAttributes());
+                        g.DrawImage(buttonImage, imageRectangle, 0, 0, buttonImage.Width, buttonImage.Height, GraphicsUnit.Pixel, ImageHelper.GetGrayscaleAttributes());
                     else
                         g.DrawImage(buttonImage, imageRectangle);
                 }
@@ -654,7 +654,7 @@ namespace JCS
             Rectangle buttonRect = new Rectangle(ToggleSwitch.ButtonValue, 1, buttonWidth, buttonWidth);
             return buttonRect;
         }
-        
+
         #endregion Helper Method Implementations
     }
 }

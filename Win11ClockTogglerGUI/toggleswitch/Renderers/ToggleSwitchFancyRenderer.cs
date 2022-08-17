@@ -5,7 +5,7 @@ using ToggleSwitch;
 
 namespace JCS
 {
-    public class ToggleSwitchFancyRenderer :  ToggleSwitchRendererBase, IDisposable
+    public class ToggleSwitchFancyRenderer : ToggleSwitchRendererBase, IDisposable
     {
         #region Constructor
 
@@ -84,7 +84,7 @@ namespace JCS
         public Color ButtonPressedLowerSurfaceColor2 { get; set; }
         public Color ButtonShadowColor1 { get; set; }
         public Color ButtonShadowColor2 { get; set; }
-        
+
         public int ButtonShadowWidth { get; set; }
         public int CornerRadius { get; set; }
 
@@ -111,7 +111,7 @@ namespace JCS
                     g.FillPath(outerBorderBrush, outerBorderPath);
                 }
 
-                g.ResetClip();    
+                g.ResetClip();
             }
 
             //Draw inner border
@@ -131,7 +131,7 @@ namespace JCS
 
                 g.ResetClip();
             }
-            
+
             Rectangle backgroundRectangle = new Rectangle(borderRectangle.X + 2, borderRectangle.Y + 2, borderRectangle.Width - 4, borderRectangle.Height - 4);
             _innerControlPath = GetRoundedRectanglePath(backgroundRectangle, CornerRadius);
         }
@@ -471,7 +471,7 @@ namespace JCS
 
             buttonRectangle.Inflate(-1, -1);
 
-            int upperHeight = buttonRectangle.Height/2;
+            int upperHeight = buttonRectangle.Height / 2;
 
             Rectangle upperGradientRect = new Rectangle(buttonRectangle.X, buttonRectangle.Y, buttonRectangle.Width, upperHeight);
             Rectangle lowerGradientRect = new Rectangle(buttonRectangle.X, buttonRectangle.Y + upperHeight, buttonRectangle.Width, buttonRectangle.Height - upperHeight);
@@ -602,7 +602,7 @@ namespace JCS
         public GraphicsPath GetRoundedRectanglePath(Rectangle rectangle, int radius)
         {
             GraphicsPath gp = new GraphicsPath();
-            int diameter = 2*radius;
+            int diameter = 2 * radius;
 
             if (diameter > ToggleSwitch.Height)
                 diameter = ToggleSwitch.Height;
@@ -621,8 +621,8 @@ namespace JCS
 
         public override int GetButtonWidth()
         {
-            float buttonWidth = 1.61f*ToggleSwitch.Height;
-            return (int) buttonWidth;
+            float buttonWidth = 1.61f * ToggleSwitch.Height;
+            return (int)buttonWidth;
         }
 
         public override Rectangle GetButtonRectangle()
