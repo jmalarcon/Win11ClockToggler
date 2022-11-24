@@ -17,6 +17,8 @@ There are **two ZIP files** that you can download and unzip to any folder in you
 - **Win11ClockTogglerGUI.exe.zip**: the graphical version, suitable for most of the users.
 - **Win11ClockTogglerCLI.zip**: a command line interface version.
 
+>**IMPORTANT**: Take into account that this program is a "hack". I Analyze the inner structure of the taskbar to find the area containing the date/time, and that structure can change in the future, so I need to analyze it again to make it work. I check every major version of Windows 11 that is released to try to make sure it works on it. But, **if you're using a preview/future version of Windows 11, then I don't support that**. It may have changes that are not applicable to current versions and that maybe can disappear when it's a finished version, so I don't spend time on that. **It works with current Windows versions**.
+
 ## GUI Version
 
 It's a graphical user interface version. Just double-click on the `Win11ClockTogglerGUI.exe` file. A new window will appear:
