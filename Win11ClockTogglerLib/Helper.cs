@@ -88,6 +88,58 @@ namespace Win11ClockToggler
             return operationPerformed;
         }
 
+        public static void ShowTaskbarElements(TaskbarElement tbeToShowOrHide)
+        {
+            //Get the Clock hWnd (different under Win10 and 11)
+            IntPtr clockHWnd = GetDateTimeControlHWnd();
+            if (clockHWnd != IntPtr.Zero)     //If Zero the taskbar has changed and is neither Win10 nor Win11
+            {
+                //Get the current visible status of the clock element: that will define the whole set visibility status to return a value
+
+                //Toggle Date/Time visibility (the system icons area in Win11 or just the Clock element in Win10)
+                ShowControl(clockHWnd);
+
+                //If we want to actuate over the full notification area, then we need to show/hide the first button (the chevron) and the SysPager
+                if (tbeToShowOrHide == TaskbarElement.FullNotificationArea)
+                {
+                    List<IntPtr> elementsToToggle = GetNotificationAreaHWnds();
+                    if (elementsToToggle.Count > 0)
+                    {
+                        elementsToToggle.ForEach(elt =>
+                        {
+                            ShowControl(elt);
+                        });
+                    }
+                }
+            }
+        }
+
+        public static void HideTaskbarElements(TaskbarElement tbeToShowOrHide)
+        {
+            //Get the Clock hWnd (different under Win10 and 11)
+            IntPtr clockHWnd = GetDateTimeControlHWnd();
+            if (clockHWnd != IntPtr.Zero)     //If Zero the taskbar has changed and is neither Win10 nor Win11
+            {
+                //Get the current visible status of the clock element: that will define the whole set visibility status to return a value
+
+                //Toggle Date/Time visibility (the system icons area in Win11 or just the Clock element in Win10)
+                HideControl(clockHWnd);
+
+                //If we want to actuate over the full notification area, then we need to show/hide the first button (the chevron) and the SysPager
+                if (tbeToShowOrHide == TaskbarElement.FullNotificationArea)
+                {
+                    List<IntPtr> elementsToToggle = GetNotificationAreaHWnds();
+                    if (elementsToToggle.Count > 0)
+                    {
+                        elementsToToggle.ForEach(elt =>
+                        {
+                            HideControl(elt);
+                        });
+                    }
+                }
+            }
+        }
+
         public static void ShowOrHideSecondaryTaskbarsElementWindow()
         {
             //Find Windows secondary Taskbar (it's like a secondary tray from the main one)

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Forms;
 using Win11ClockToggler;
 
@@ -26,7 +28,8 @@ namespace Win11ClockTogglerGUI
         //Internal IDs for the global hot keys (associated with this window)
         private static int TOGGLE_KEY_ID = 1;
         private static int STEALTH_KEY_ID = 2;
-
+        private bool isShown = false;
+        private DateTime lastMouseOvered = DateTime.MinValue;
         public Win11ClockTogglerGUI()
         {
             InitializeComponent();
@@ -36,6 +39,9 @@ namespace Win11ClockTogglerGUI
             RegisterHotKey(this.Handle, TOGGLE_KEY_ID, keyModifiers, (int)Keys.F6);
             RegisterHotKey(this.Handle, STEALTH_KEY_ID, keyModifiers, (int)Keys.F7);
         }
+
+        
+
 
         private void CheckBoxes_Paint(object sender, PaintEventArgs e)
         {
@@ -94,6 +100,48 @@ namespace Win11ClockTogglerGUI
             }
         }
 
+        private void ShowClockElements()
+        {
+
+            //By default, hide at least the clock
+            Helper.TaskbarElement tbeToToggle = Helper.TaskbarElement.Clock;
+            //If the user wants, toggle the full notification area
+            if (chkNotifArea.Checked) tbeToToggle = Helper.TaskbarElement.FullNotificationArea;
+            Helper.ShowTaskbarElements(tbeToToggle);
+
+            IsDirty = false;
+            btnExit.Text = "Exit";
+            pnlCheckBoxes.Enabled = true;
+            //Stop monitoring the notificaton area
+            tmrShowMonitor.Enabled = false;
+            CurrentMonitoredControls = new List<IntPtr>();
+            //This is a hack: dispose the notification icon (although it's not visible) to force a redraw of the notification area in Windows 10
+            if (Helper.IsWindows10)
+                notifyIcon.Visible = false;
+        }
+
+        private void HideClockElements()
+        {
+            //By default, hide at least the clock
+            Helper.TaskbarElement tbeToToggle = Helper.TaskbarElement.Clock;
+            //If the user wants, toggle the full notification area
+            if (chkNotifArea.Checked) tbeToToggle = Helper.TaskbarElement.FullNotificationArea;
+            Helper.HideTaskbarElements(tbeToToggle);
+
+            IsDirty = true;
+            btnExit.Text = "Restore && Exit";
+            pnlCheckBoxes.Enabled = false;
+            //Monitor the notification area in case it pops up again for any reason
+            //(if the user hasn't enabled Focus Assist, any notification or any new icon added to the tray will show all again)
+            CurrentMonitoredControls.Add(Helper.GetDateTimeControlHWnd());  //Always monitor the Datetime control
+            if (chkNotifArea.Checked)
+                CurrentMonitoredControls.AddRange(Helper.GetNotificationAreaHWnds());   //It's a different list depending on the Windows version
+            tmrShowMonitor.Enabled = true;
+            //Add notification icon (hack in Win10 to be able to restore the real width of the taskbar when showing it again)
+            if (Helper.IsWindows10)
+                notifyIcon.Visible = true;
+        }
+
         private void btnHideShow_Click(object sender, EventArgs e)
         {
             //By default, hide at least the clock
@@ -110,29 +158,10 @@ namespace Win11ClockTogglerGUI
             switch (operation)
             {
                 case Helper.SWOperation.Hide:
-                    IsDirty = true;
-                    btnExit.Text = "Restore && Exit";
-                    pnlCheckBoxes.Enabled = false;
-                    //Monitor the notification area in case it pops up again for any reason
-                    //(if the user hasn't enabled Focus Assist, any notification or any new icon added to the tray will show all again)
-                    CurrentMonitoredControls.Add(Helper.GetDateTimeControlHWnd());  //Always monitor the Datetime control
-                    if (chkNotifArea.Checked)
-                        CurrentMonitoredControls.AddRange(Helper.GetNotificationAreaHWnds());   //It's a different list depending on the Windows version
-                    tmrShowMonitor.Enabled = true;
-                    //Add notification icon (hack in Win10 to be able to restore the real width of the taskbar when showing it again)
-                    if (Helper.IsWindows10)
-                        notifyIcon.Visible = true;
+                    HideClockElements();
                     break;
                 case Helper.SWOperation.Show:
-                    IsDirty = false;
-                    btnExit.Text = "Exit";
-                    pnlCheckBoxes.Enabled = true;
-                    //Stop monitoring the notificaton area
-                    tmrShowMonitor.Enabled = false;
-                    CurrentMonitoredControls = new List<IntPtr>();
-                    //This is a hack: dispose the notification icon (although it's not visible) to force a redraw of the notification area in Windows 10
-                    if (Helper.IsWindows10)
-                        notifyIcon.Visible = false;
+                    ShowClockElements();
                     break;
                 default:  //Controls can't be found: something has changed in the underlying structure: notify
                     MessageBox.Show(@"The notification area and/or the Date/Time controls have not been found.
@@ -169,9 +198,63 @@ and let me know about this issue. Thanks!",
                 chkSecondary.Checked = false;
                 DisableCheckBox(chkSecondary);
             }
+
+            autoTimer = new System.Windows.Forms.Timer();
+            autoTimer.Interval = 300;
+            autoTimer.Tick += AutoTimer_Tick;
+            autoTimer.Start();
+
+            HideClockElements();
+            isShown = false;
+
             //Check for new version in background
             bgwCheckVersion.RunWorkerAsync();
         }
+
+        private void AutoTimer_Tick(object sender, EventArgs e)
+        {
+            var res = Screen.GetBounds(this);
+            float dx, dy;
+
+            Graphics g = this.CreateGraphics();
+            try
+            {
+                dx = g.DpiX;
+                dy = g.DpiY;
+            }
+            finally
+            {
+                g.Dispose();
+            }
+
+            float dpiFactor = dx / 96f;
+
+            int left = res.Right - (int)(170 * dpiFactor);
+            int top = res.Bottom - (int)(48 * dpiFactor);
+
+            var pos = System.Windows.Forms.Control.MousePosition;
+
+            if (pos.X >= left && pos.Y >= top && pos.X <= res.Right && pos.Y <= res.Bottom)
+            {
+                lastMouseOvered = DateTime.Now;
+                if (!isShown)
+                {
+                    ShowClockElements();
+                    isShown = true;
+                }
+
+            }
+            else
+            {
+                if (isShown && (DateTime.Now - lastMouseOvered).TotalSeconds > 5)
+                {
+                    HideClockElements();
+                    isShown = false;
+                }
+            }
+        }
+
+        System.Windows.Forms.Timer autoTimer;
 
         //Form closing
         private void Win11ClockTogglerGUI_FormClosing(object sender, FormClosingEventArgs e)
@@ -199,14 +282,14 @@ and let me know about this issue. Thanks!",
         {
             if (this.Visible)
             {
-                this.Hide();
+                this.HideClockElements();
                 MessageBox.Show("The Win11ClockToggler window is now completely hidden.\nWhenever you want to bring it back, press Win+Shift+F7.",
                     "Windows 11 Date//Time & Notification Area Toggler",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                this.Show();
+                this.ShowClockElements();
                 this.WindowState = FormWindowState.Normal;
                 BringToFront();
             }
@@ -253,7 +336,7 @@ and let me know about this issue. Thanks!",
 
         private void notifyIcon_Click(object sender, EventArgs e)
         {
-            this.Show();
+            this.ShowClockElements();
         }
 
         private void cmdAbout_Click(object sender, EventArgs e)
