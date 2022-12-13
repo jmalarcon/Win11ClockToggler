@@ -286,9 +286,11 @@ and let me know about this issue. Thanks!",
                 MessageBox.Show("The Win11ClockToggler window is now completely hidden.\nWhenever you want to bring it back, press Win+Shift+F7.",
                     "Windows 11 Date//Time & Notification Area Toggler",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Visible = false;
             }
             else
             {
+                this.Visible = true;
                 this.ShowClockElements();
                 this.WindowState = FormWindowState.Normal;
                 BringToFront();
