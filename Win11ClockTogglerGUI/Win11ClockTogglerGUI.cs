@@ -422,6 +422,8 @@ and let me know about this issue. Thanks!",
             pictureBox.Enabled = checkBox.Enabled;
             checkBox.Visible = false;
             label.Text = checkBox.Checked ? "On" : "Off";
+            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox.Size = new Size(77, 32);
 
         }
 
