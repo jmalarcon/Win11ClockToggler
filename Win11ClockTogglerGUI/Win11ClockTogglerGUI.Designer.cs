@@ -54,20 +54,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.AutoHideImage = new System.Windows.Forms.PictureBox();
-            this.pnlSecondary = new System.Windows.Forms.Panel();
-            this.SecondaryLabel = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.SecondaryImage = new System.Windows.Forms.PictureBox();
-            this.SecondaryToggle = new System.Windows.Forms.CheckBox();
-            this.pnlDateTime = new System.Windows.Forms.Panel();
-            this.DateTimeLabel = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.DateTimeImage = new System.Windows.Forms.PictureBox();
-            this.DateTimeToggle = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.pnlNotifArea = new System.Windows.Forms.Panel();
             this.label23 = new System.Windows.Forms.Label();
             this.NotificationAreaLabel = new System.Windows.Forms.Label();
@@ -76,6 +62,20 @@
             this.label7 = new System.Windows.Forms.Label();
             this.NotificationAreaImage = new System.Windows.Forms.PictureBox();
             this.NotificationAreaToggle = new System.Windows.Forms.CheckBox();
+            this.pnlDateTime = new System.Windows.Forms.Panel();
+            this.DateTimeLabel = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.DateTimeImage = new System.Windows.Forms.PictureBox();
+            this.DateTimeToggle = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pnlSecondary = new System.Windows.Forms.Panel();
+            this.SecondaryLabel = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.SecondaryImage = new System.Windows.Forms.PictureBox();
+            this.SecondaryToggle = new System.Windows.Forms.CheckBox();
             this.tmrShowMonitor = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.bgwCheckVersion = new System.ComponentModel.BackgroundWorker();
@@ -89,12 +89,12 @@
             this.UpdatePanel.SuspendLayout();
             this.ShowOnHoverPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AutoHideImage)).BeginInit();
-            this.pnlSecondary.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SecondaryImage)).BeginInit();
-            this.pnlDateTime.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DateTimeImage)).BeginInit();
             this.pnlNotifArea.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NotificationAreaImage)).BeginInit();
+            this.pnlDateTime.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DateTimeImage)).BeginInit();
+            this.pnlSecondary.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SecondaryImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ToggleOnSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ToggleOffSource)).BeginInit();
             this.SuspendLayout();
@@ -282,6 +282,8 @@
             this.UpdatePanel.Name = "UpdatePanel";
             this.UpdatePanel.Size = new System.Drawing.Size(901, 84);
             this.UpdatePanel.TabIndex = 11;
+            this.UpdatePanel.MouseEnter += new System.EventHandler(this.UpdatePanel_MouseEnter);
+            this.UpdatePanel.MouseLeave += new System.EventHandler(this.UpdatePanel_MouseLeave);
             // 
             // lnkNewVersion
             // 
@@ -403,173 +405,6 @@
             this.AutoHideImage.TabStop = false;
             this.AutoHideImage.Click += new System.EventHandler(this.AutoHideImage_Click);
             // 
-            // pnlSecondary
-            // 
-            this.pnlSecondary.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlSecondary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(43)))));
-            this.pnlSecondary.Controls.Add(this.SecondaryLabel);
-            this.pnlSecondary.Controls.Add(this.label8);
-            this.pnlSecondary.Controls.Add(this.label9);
-            this.pnlSecondary.Controls.Add(this.label10);
-            this.pnlSecondary.Controls.Add(this.SecondaryImage);
-            this.pnlSecondary.Controls.Add(this.SecondaryToggle);
-            this.pnlSecondary.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.pnlSecondary.Location = new System.Drawing.Point(10, 280);
-            this.pnlSecondary.Margin = new System.Windows.Forms.Padding(10);
-            this.pnlSecondary.Name = "pnlSecondary";
-            this.pnlSecondary.Size = new System.Drawing.Size(901, 84);
-            this.pnlSecondary.TabIndex = 9;
-            // 
-            // SecondaryLabel
-            // 
-            this.SecondaryLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SecondaryLabel.AutoSize = true;
-            this.SecondaryLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SecondaryLabel.Location = new System.Drawing.Point(790, 33);
-            this.SecondaryLabel.Name = "SecondaryLabel";
-            this.SecondaryLabel.Size = new System.Drawing.Size(26, 17);
-            this.SecondaryLabel.TabIndex = 19;
-            this.SecondaryLabel.Text = "Off";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(52, 51);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(143, 17);
-            this.label8.TabIndex = 18;
-            this.label8.Text = "Hide on other screens?";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI Symbol", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(9, 21);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(44, 37);
-            this.label9.TabIndex = 17;
-            this.label9.Text = "";
-            // 
-            // label10
-            // 
-            this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(49, 19);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(194, 29);
-            this.label10.TabIndex = 16;
-            this.label10.Text = "Secondary Screens";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label10.Click += new System.EventHandler(this.label10_Click);
-            // 
-            // SecondaryImage
-            // 
-            this.SecondaryImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SecondaryImage.Location = new System.Drawing.Point(821, 26);
-            this.SecondaryImage.Name = "SecondaryImage";
-            this.SecondaryImage.Size = new System.Drawing.Size(77, 32);
-            this.SecondaryImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.SecondaryImage.TabIndex = 12;
-            this.SecondaryImage.TabStop = false;
-            this.SecondaryImage.LoadCompleted += new System.ComponentModel.AsyncCompletedEventHandler(this.SecondaryImage_LoadCompleted);
-            this.SecondaryImage.Click += new System.EventHandler(this.SecondaryImage_Click);
-            // 
-            // SecondaryToggle
-            // 
-            this.SecondaryToggle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SecondaryToggle.AutoSize = true;
-            this.SecondaryToggle.Location = new System.Drawing.Point(798, 10);
-            this.SecondaryToggle.Name = "SecondaryToggle";
-            this.SecondaryToggle.Size = new System.Drawing.Size(15, 14);
-            this.SecondaryToggle.TabIndex = 11;
-            this.SecondaryToggle.UseVisualStyleBackColor = true;
-            this.SecondaryToggle.CheckedChanged += new System.EventHandler(this.SecondaryToggle_CheckedChanged);
-            // 
-            // pnlDateTime
-            // 
-            this.pnlDateTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlDateTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(43)))));
-            this.pnlDateTime.Controls.Add(this.DateTimeLabel);
-            this.pnlDateTime.Controls.Add(this.label4);
-            this.pnlDateTime.Controls.Add(this.label3);
-            this.pnlDateTime.Controls.Add(this.DateTimeImage);
-            this.pnlDateTime.Controls.Add(this.DateTimeToggle);
-            this.pnlDateTime.Controls.Add(this.label1);
-            this.pnlDateTime.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.pnlDateTime.Location = new System.Drawing.Point(10, 10);
-            this.pnlDateTime.Margin = new System.Windows.Forms.Padding(10);
-            this.pnlDateTime.Name = "pnlDateTime";
-            this.pnlDateTime.Size = new System.Drawing.Size(901, 83);
-            this.pnlDateTime.TabIndex = 9;
-            // 
-            // DateTimeLabel
-            // 
-            this.DateTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DateTimeLabel.AutoSize = true;
-            this.DateTimeLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DateTimeLabel.Location = new System.Drawing.Point(790, 33);
-            this.DateTimeLabel.Name = "DateTimeLabel";
-            this.DateTimeLabel.Size = new System.Drawing.Size(26, 17);
-            this.DateTimeLabel.TabIndex = 17;
-            this.DateTimeLabel.Text = "Off";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(53, 50);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(320, 17);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Should the date and time be hidden (Always enabled)";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI Symbol", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(9, 26);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 37);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "🕙";
-            // 
-            // DateTimeImage
-            // 
-            this.DateTimeImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DateTimeImage.Location = new System.Drawing.Point(821, 26);
-            this.DateTimeImage.Name = "DateTimeImage";
-            this.DateTimeImage.Size = new System.Drawing.Size(77, 32);
-            this.DateTimeImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.DateTimeImage.TabIndex = 10;
-            this.DateTimeImage.TabStop = false;
-            this.DateTimeImage.Click += new System.EventHandler(this.DateTimeImage_Click);
-            // 
-            // DateTimeToggle
-            // 
-            this.DateTimeToggle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DateTimeToggle.AutoSize = true;
-            this.DateTimeToggle.Location = new System.Drawing.Point(798, 7);
-            this.DateTimeToggle.Name = "DateTimeToggle";
-            this.DateTimeToggle.Size = new System.Drawing.Size(15, 14);
-            this.DateTimeToggle.TabIndex = 9;
-            this.DateTimeToggle.UseVisualStyleBackColor = true;
-            this.DateTimeToggle.CheckedChanged += new System.EventHandler(this.DateTimeToggle_CheckedChanged);
-            this.DateTimeToggle.Layout += new System.Windows.Forms.LayoutEventHandler(this.DateTimeToggle_Layout);
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(49, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(194, 29);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Date/Time";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // pnlNotifArea
             // 
             this.pnlNotifArea.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -662,6 +497,173 @@
             this.NotificationAreaToggle.UseVisualStyleBackColor = true;
             this.NotificationAreaToggle.CheckedChanged += new System.EventHandler(this.NotificationAreaToggle_CheckedChanged);
             // 
+            // pnlDateTime
+            // 
+            this.pnlDateTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlDateTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(43)))));
+            this.pnlDateTime.Controls.Add(this.DateTimeLabel);
+            this.pnlDateTime.Controls.Add(this.label4);
+            this.pnlDateTime.Controls.Add(this.label3);
+            this.pnlDateTime.Controls.Add(this.DateTimeImage);
+            this.pnlDateTime.Controls.Add(this.DateTimeToggle);
+            this.pnlDateTime.Controls.Add(this.label1);
+            this.pnlDateTime.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.pnlDateTime.Location = new System.Drawing.Point(10, 10);
+            this.pnlDateTime.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlDateTime.Name = "pnlDateTime";
+            this.pnlDateTime.Size = new System.Drawing.Size(901, 83);
+            this.pnlDateTime.TabIndex = 9;
+            // 
+            // DateTimeLabel
+            // 
+            this.DateTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DateTimeLabel.AutoSize = true;
+            this.DateTimeLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DateTimeLabel.Location = new System.Drawing.Point(790, 33);
+            this.DateTimeLabel.Name = "DateTimeLabel";
+            this.DateTimeLabel.Size = new System.Drawing.Size(26, 17);
+            this.DateTimeLabel.TabIndex = 17;
+            this.DateTimeLabel.Text = "Off";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(53, 50);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(320, 17);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Should the date and time be hidden (Always enabled)";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Symbol", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(9, 26);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(44, 37);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "🕙";
+            // 
+            // DateTimeImage
+            // 
+            this.DateTimeImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DateTimeImage.Location = new System.Drawing.Point(821, 26);
+            this.DateTimeImage.Name = "DateTimeImage";
+            this.DateTimeImage.Size = new System.Drawing.Size(77, 32);
+            this.DateTimeImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.DateTimeImage.TabIndex = 10;
+            this.DateTimeImage.TabStop = false;
+            this.DateTimeImage.Click += new System.EventHandler(this.DateTimeImage_Click);
+            // 
+            // DateTimeToggle
+            // 
+            this.DateTimeToggle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DateTimeToggle.AutoSize = true;
+            this.DateTimeToggle.Location = new System.Drawing.Point(798, 7);
+            this.DateTimeToggle.Name = "DateTimeToggle";
+            this.DateTimeToggle.Size = new System.Drawing.Size(15, 14);
+            this.DateTimeToggle.TabIndex = 9;
+            this.DateTimeToggle.UseVisualStyleBackColor = true;
+            this.DateTimeToggle.CheckedChanged += new System.EventHandler(this.DateTimeToggle_CheckedChanged);
+            this.DateTimeToggle.Layout += new System.Windows.Forms.LayoutEventHandler(this.DateTimeToggle_Layout);
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(49, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(194, 29);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Date/Time";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnlSecondary
+            // 
+            this.pnlSecondary.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlSecondary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(43)))));
+            this.pnlSecondary.Controls.Add(this.SecondaryLabel);
+            this.pnlSecondary.Controls.Add(this.label8);
+            this.pnlSecondary.Controls.Add(this.label9);
+            this.pnlSecondary.Controls.Add(this.label10);
+            this.pnlSecondary.Controls.Add(this.SecondaryImage);
+            this.pnlSecondary.Controls.Add(this.SecondaryToggle);
+            this.pnlSecondary.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.pnlSecondary.Location = new System.Drawing.Point(10, 280);
+            this.pnlSecondary.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlSecondary.Name = "pnlSecondary";
+            this.pnlSecondary.Size = new System.Drawing.Size(901, 84);
+            this.pnlSecondary.TabIndex = 9;
+            // 
+            // SecondaryLabel
+            // 
+            this.SecondaryLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SecondaryLabel.AutoSize = true;
+            this.SecondaryLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SecondaryLabel.Location = new System.Drawing.Point(790, 33);
+            this.SecondaryLabel.Name = "SecondaryLabel";
+            this.SecondaryLabel.Size = new System.Drawing.Size(26, 17);
+            this.SecondaryLabel.TabIndex = 19;
+            this.SecondaryLabel.Text = "Off";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(52, 51);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(143, 17);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "Hide on other screens?";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI Symbol", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(9, 21);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(44, 37);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "";
+            // 
+            // label10
+            // 
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(49, 19);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(194, 29);
+            this.label10.TabIndex = 16;
+            this.label10.Text = "Secondary Screens";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label10.Click += new System.EventHandler(this.label10_Click);
+            // 
+            // SecondaryImage
+            // 
+            this.SecondaryImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SecondaryImage.Location = new System.Drawing.Point(821, 26);
+            this.SecondaryImage.Name = "SecondaryImage";
+            this.SecondaryImage.Size = new System.Drawing.Size(77, 32);
+            this.SecondaryImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.SecondaryImage.TabIndex = 12;
+            this.SecondaryImage.TabStop = false;
+            this.SecondaryImage.LoadCompleted += new System.ComponentModel.AsyncCompletedEventHandler(this.SecondaryImage_LoadCompleted);
+            this.SecondaryImage.Click += new System.EventHandler(this.SecondaryImage_Click);
+            // 
+            // SecondaryToggle
+            // 
+            this.SecondaryToggle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SecondaryToggle.AutoSize = true;
+            this.SecondaryToggle.Location = new System.Drawing.Point(798, 10);
+            this.SecondaryToggle.Name = "SecondaryToggle";
+            this.SecondaryToggle.Size = new System.Drawing.Size(15, 14);
+            this.SecondaryToggle.TabIndex = 11;
+            this.SecondaryToggle.UseVisualStyleBackColor = true;
+            this.SecondaryToggle.CheckedChanged += new System.EventHandler(this.SecondaryToggle_CheckedChanged);
+            // 
             // tmrShowMonitor
             // 
             this.tmrShowMonitor.Interval = 10;
@@ -741,15 +743,15 @@
             this.ShowOnHoverPanel.ResumeLayout(false);
             this.ShowOnHoverPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AutoHideImage)).EndInit();
-            this.pnlSecondary.ResumeLayout(false);
-            this.pnlSecondary.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SecondaryImage)).EndInit();
-            this.pnlDateTime.ResumeLayout(false);
-            this.pnlDateTime.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DateTimeImage)).EndInit();
             this.pnlNotifArea.ResumeLayout(false);
             this.pnlNotifArea.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NotificationAreaImage)).EndInit();
+            this.pnlDateTime.ResumeLayout(false);
+            this.pnlDateTime.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DateTimeImage)).EndInit();
+            this.pnlSecondary.ResumeLayout(false);
+            this.pnlSecondary.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SecondaryImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ToggleOnSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ToggleOffSource)).EndInit();
             this.ResumeLayout(false);

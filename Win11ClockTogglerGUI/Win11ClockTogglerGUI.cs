@@ -557,5 +557,22 @@ and let me know about this issue. Thanks!",
         {
 
         }
+
+        private void UpdatePanel_MouseEnter(object sender, EventArgs e)
+        {
+            if (UpdatePanel.Enabled)
+            {
+                UpdatePanel.Cursor = Cursors.Hand;
+            }
+            else
+            {
+                UpdatePanel.Cursor = Cursors.No;
+            }
+        }
+
+        private void UpdatePanel_MouseLeave(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.Default;
+        }
     }
 }
