@@ -78,23 +78,6 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="toggleswitch\GraphicsExtensionMethods.cs" />
-    <Compile Include="toggleswitch\ImageHelper.cs" />
-    <Compile Include="toggleswitch\RendererChangedEventArgs.cs" />
-    <Compile Include="toggleswitch\Renderers\ToggleSwitchAndroidRenderer.cs" />
-    <Compile Include="toggleswitch\Renderers\ToggleSwitchBrushedMetalRenderer.cs" />
-    <Compile Include="toggleswitch\Renderers\ToggleSwitchCarbonRenderer.cs" />
-    <Compile Include="toggleswitch\Renderers\ToggleSwitchFancyRenderer.cs" />
-    <Compile Include="toggleswitch\Renderers\ToggleSwitchIOS5Renderer.cs" />
-    <Compile Include="toggleswitch\Renderers\ToggleSwitchIphoneRenderer.cs" />
-    <Compile Include="toggleswitch\Renderers\ToggleSwitchMetroRenderer.cs" />
-    <Compile Include="toggleswitch\Renderers\ToggleSwitchModernRenderer.cs" />
-    <Compile Include="toggleswitch\Renderers\ToggleSwitchOSXRenderer.cs" />
-    <Compile Include="toggleswitch\Renderers\ToggleSwitchPlainAndSimpleRenderer.cs" />
-    <Compile Include="toggleswitch\Renderers\ToggleSwitchRendererBase.cs" />
-    <Compile Include="toggleswitch\ToggleSwitch.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Win11ClockTogglerGUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +96,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Win11ClockTogglerGUI.resx">
       <DependentUpon>Win11ClockTogglerGUI.cs</DependentUpon>
@@ -139,6 +123,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\toggle_off.ico" />
+    <None Include="Resources\toggle_off.png" />
+    <None Include="Resources\toggle_on.png" />
+    <None Include="Resources\toggle_off1.png" />
+    <None Include="Resources\toggle_on1.png" />
     <Content Include="Win11ClockToggler.ico" />
   </ItemGroup>
   <ItemGroup>

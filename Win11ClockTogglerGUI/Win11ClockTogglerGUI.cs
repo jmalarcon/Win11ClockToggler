@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
+using System.Resources;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Windows.Forms;
 using Win11ClockToggler;
 
@@ -40,7 +39,7 @@ namespace Win11ClockTogglerGUI
             RegisterHotKey(this.Handle, STEALTH_KEY_ID, keyModifiers, (int)Keys.F7);
         }
 
-        
+
 
 
         private void CheckBoxes_Paint(object sender, PaintEventArgs e)
@@ -50,11 +49,11 @@ namespace Win11ClockTogglerGUI
             ControlPaint.DrawBorder(e.Graphics, current.ClientRectangle, Color.Black, ButtonBorderStyle.Solid);
         }
 
-        private void DisableCheckBox(JCS.ToggleSwitch chkBox)
+        private void DisableCheckBox(CheckBox chkBox)
         {
             chkBox.Enabled = false;
-            chkBox.Parent.ForeColor = SystemColors.InactiveCaption;
-            chkBox.Parent.BackColor = SystemColors.ControlLight;
+            chkBox.Parent.ForeColor = Color.FromArgb(48, 48, 48);
+            chkBox.Parent.BackColor = Color.FromArgb(34, 34, 34);
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -106,11 +105,11 @@ namespace Win11ClockTogglerGUI
             //By default, hide at least the clock
             Helper.TaskbarElement tbeToToggle = Helper.TaskbarElement.Clock;
             //If the user wants, toggle the full notification area
-            if (chkNotifArea.Checked) tbeToToggle = Helper.TaskbarElement.FullNotificationArea;
+            if (NotificationAreaToggle.Checked) tbeToToggle = Helper.TaskbarElement.FullNotificationArea;
             Helper.ShowTaskbarElements(tbeToToggle);
 
             IsDirty = false;
-            btnExit.Text = "Exit";
+            ExitText.Text = "Exit";
             pnlCheckBoxes.Enabled = true;
             //Stop monitoring the notificaton area
             tmrShowMonitor.Enabled = false;
@@ -125,16 +124,16 @@ namespace Win11ClockTogglerGUI
             //By default, hide at least the clock
             Helper.TaskbarElement tbeToToggle = Helper.TaskbarElement.Clock;
             //If the user wants, toggle the full notification area
-            if (chkNotifArea.Checked) tbeToToggle = Helper.TaskbarElement.FullNotificationArea;
+            if (NotificationAreaToggle.Checked) tbeToToggle = Helper.TaskbarElement.FullNotificationArea;
             Helper.HideTaskbarElements(tbeToToggle);
 
             IsDirty = true;
-            btnExit.Text = "Restore && Exit";
-            pnlCheckBoxes.Enabled = false;
+            ExitText.Text = "Restore && Exit";
+            //pnlCheckBoxes.Enabled = false;
             //Monitor the notification area in case it pops up again for any reason
             //(if the user hasn't enabled Focus Assist, any notification or any new icon added to the tray will show all again)
             CurrentMonitoredControls.Add(Helper.GetDateTimeControlHWnd());  //Always monitor the Datetime control
-            if (chkNotifArea.Checked)
+            if (NotificationAreaToggle.Checked)
                 CurrentMonitoredControls.AddRange(Helper.GetNotificationAreaHWnds());   //It's a different list depending on the Windows version
             tmrShowMonitor.Enabled = true;
             //Add notification icon (hack in Win10 to be able to restore the real width of the taskbar when showing it again)
@@ -147,7 +146,7 @@ namespace Win11ClockTogglerGUI
             //By default, hide at least the clock
             Helper.TaskbarElement tbeToToggle = Helper.TaskbarElement.Clock;
             //If the user wants, toggle the full notification area
-            if (chkNotifArea.Checked) tbeToToggle = Helper.TaskbarElement.FullNotificationArea;
+            if (NotificationAreaToggle.Checked) tbeToToggle = Helper.TaskbarElement.FullNotificationArea;
 
             //Operation performed (hide or show) (received as information of the operation that has been done)
             Helper.SWOperation operation = Helper.SWOperation.None;
@@ -178,7 +177,7 @@ and let me know about this issue. Thanks!",
             }
 
             //Disable clock in secondary taskbars
-            if (chkSecondary.Checked)
+            if (SecondaryToggle.Checked)
                 Helper.ShowOrHideSecondaryTaskbarsElementWindow();
 
         }
@@ -186,29 +185,30 @@ and let me know about this issue. Thanks!",
         //Form load 
         private void Win11ClockTogglerGUI_Load(object sender, EventArgs e)
         {
-            DisableCheckBox(chkDateTime);   //This is always fixed, for information purposes, because the Date/Time is always toggled
+            DisableCheckBox(DateTimeToggle);   //This is always fixed, for information purposes, because the Date/Time is always toggled
             //Get the latest state of the option checkboxes to keep them the same
-            chkNotifArea.Checked = (Helper.ReadRegValue(REG_CHKNOTIFAREA_STATUS, "1") == "1");
-            chkSecondary.Checked = (Helper.ReadRegValue(REG_CHKALLLDISPLAYS_STATUS, "1") == "1");
+            NotificationAreaToggle.Checked = (Helper.ReadRegValue(REG_CHKNOTIFAREA_STATUS, "1") == "1");
+            SecondaryToggle.Checked = (Helper.ReadRegValue(REG_CHKALLLDISPLAYS_STATUS, "1") == "1");
 
             //Check if there are secondary taskbars in secondary windows
             if (!Helper.AreThereSecondaryTaskbars())
             {
                 //Disable checkbox if there are not secondary taskbars
-                chkSecondary.Checked = false;
-                DisableCheckBox(chkSecondary);
+                SecondaryToggle.Checked = false;
+                DisableCheckBox(SecondaryToggle);
             }
 
+            SetAllCheckboxes();
+            //Check for new version in background
+            bgwCheckVersion.RunWorkerAsync();
+        }
+
+        private void StartAutoTimer()
+        {
             autoTimer = new System.Windows.Forms.Timer();
             autoTimer.Interval = 300;
             autoTimer.Tick += AutoTimer_Tick;
             autoTimer.Start();
-
-            HideClockElements();
-            isShown = false;
-
-            //Check for new version in background
-            bgwCheckVersion.RunWorkerAsync();
         }
 
         private void AutoTimer_Tick(object sender, EventArgs e)
@@ -260,14 +260,14 @@ and let me know about this issue. Thanks!",
         private void Win11ClockTogglerGUI_FormClosing(object sender, FormClosingEventArgs e)
         {
             //Save the status of the checks to keep the latest option
-            Helper.SaveRegValue(REG_CHKNOTIFAREA_STATUS, chkNotifArea.Checked ? "1" : "0");
-            Helper.SaveRegValue(REG_CHKALLLDISPLAYS_STATUS, chkSecondary.Checked ? "1" : "0");
+            Helper.SaveRegValue(REG_CHKNOTIFAREA_STATUS, NotificationAreaToggle.Checked ? "1" : "0");
+            Helper.SaveRegValue(REG_CHKALLLDISPLAYS_STATUS, SecondaryToggle.Checked ? "1" : "0");
 
             if (IsDirty)
                 btnHideShow_Click(null, null);
 
             //Dispose Notify icons because of Windows 10 hack
-            if (Helper.IsWindows10 && chkNotifArea.Checked)
+            if (Helper.IsWindows10 && NotificationAreaToggle.Checked)
             {
                 try
                 {
@@ -323,9 +323,20 @@ and let me know about this issue. Thanks!",
             //If there's a new version, show the label with the infomation and link
             if (LatestVersion != null && LatestVersion != string.Empty)
             {
-                lnkNewVersion.Text = $"⚠ New version {LatestVersion} available! Click here to download...";
+                lnkNewVersion.Text = $"New version {LatestVersion} available! Click here to download...";
                 lnkNewVersion.LinkArea = new LinkArea(0, lnkNewVersion.Text.Length);
                 lnkNewVersion.Visible = true;
+                UpdatePanel.ForeColor = Color.FromArgb(227, 227, 227);
+                UpdatePanel.BackColor = Color.FromArgb(43, 43, 43);
+            }
+            else
+            {
+                lnkNewVersion.Visible = true;
+                lnkNewVersion.Text = "You are on the latest version";
+                lnkNewVersion.LinkArea = new LinkArea();
+
+                UpdatePanel.ForeColor = Color.FromArgb(48, 48, 48);
+                UpdatePanel.BackColor = Color.FromArgb(34, 34, 34);
             }
         }
 
@@ -343,6 +354,169 @@ and let me know about this issue. Thanks!",
         {
             About about = new About();
             about.ShowDialog(this);
+        }
+
+        private void AutoHideToggle_CheckedChanged(object sender, EventArgs e)
+        {
+            SetImageFromToggle(AutoHideToggle, AutoHideImage, AutoHideLabel);
+
+            if (AutoHideToggle.Checked)
+            {
+                HideClockElements();
+                isShown = false;
+                StartAutoTimer();
+            }
+            else
+            {
+                autoTimer.Stop();
+                autoTimer = null;
+
+            }              
+        }
+
+        private void DateTimeToggle_CheckedChanged(object sender, EventArgs e)
+        {
+            SetImageFromToggle(DateTimeToggle, DateTimeImage, DateTimeLabel);
+        }
+
+        private void DateTimeToggle_Layout(object sender, LayoutEventArgs e)
+        {
+            SetImageFromToggle(DateTimeToggle, DateTimeImage, DateTimeLabel);
+        }
+
+        private void SetImageFromToggle(CheckBox checkBox, PictureBox pictureBox, Label label)
+        {
+            pictureBox.Image = checkBox.Checked ? ToggleOnSource.Image : ToggleOffSource.Image;
+
+            pictureBox.Enabled = checkBox.Enabled;
+            checkBox.Visible = false;
+            label.Text = checkBox.Checked ? "On" : "Off";
+
+        }
+
+        private void NotificationAreaToggle_CheckedChanged(object sender, EventArgs e)
+        {
+            SetImageFromToggle(NotificationAreaToggle, NotificationAreaImage, NotificationAreaLabel);
+        }
+
+        private void SecondaryToggle_CheckedChanged(object sender, EventArgs e)
+        {
+            SetImageFromToggle(SecondaryToggle, SecondaryImage, SecondaryLabel);
+        }
+
+        private void SetAllCheckboxes()
+        {
+            SetImageFromToggle(DateTimeToggle, DateTimeImage, DateTimeLabel);
+            SetImageFromToggle(NotificationAreaToggle, NotificationAreaImage, NotificationAreaLabel);
+            SetImageFromToggle(SecondaryToggle, SecondaryImage, SecondaryLabel);
+            SetImageFromToggle(AutoHideToggle, AutoHideImage, AutoHideLabel);
+        }
+
+        private void SecondaryImage_LoadCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            
+        }
+
+        private void DateTimeImage_Click(object sender, EventArgs e)
+        {
+            ClickToggleImage(DateTimeToggle);
+        }
+
+        private void ClickToggleImage(CheckBox checkBox)
+        {
+            if (checkBox.Enabled)
+            {
+                checkBox.Checked = !checkBox.Checked;
+            }
+        }
+
+        private void NotificationAreaImage_Click(object sender, EventArgs e)
+        {
+            ClickToggleImage(NotificationAreaToggle);
+        }
+
+        private void SecondaryImage_Click(object sender, EventArgs e)
+        {
+            ClickToggleImage(SecondaryToggle);
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AutoHideImage_Click(object sender, EventArgs e)
+        {
+            ClickToggleImage(AutoHideToggle);
+        }
+
+        private void panel1_Click(object sender, EventArgs e)
+        {
+            About about = new About();
+            about.ShowDialog(this);
+        }
+
+        private void panel2_Click(object sender, EventArgs e)
+        {
+            btnHideShow_Click(null, null);
+        }
+
+        private void panel3_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void label14_Click(object sender, EventArgs e)
+        {
+            About about = new About();
+            about.ShowDialog(this);
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            About about = new About();
+            about.ShowDialog(this);
+        }
+
+        private void label17_Click(object sender, EventArgs e)
+        {
+            About about = new About();
+            about.ShowDialog(this);
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label20_Click(object sender, EventArgs e)
+        {
+            btnHideShow_Click(null, null);
+        }
+
+        private void label18_Click(object sender, EventArgs e)
+        {
+            btnHideShow_Click(null, null);
+        }
+
+        private void label19_Click(object sender, EventArgs e)
+        {
+            btnHideShow_Click(null, null);
         }
     }
 }
