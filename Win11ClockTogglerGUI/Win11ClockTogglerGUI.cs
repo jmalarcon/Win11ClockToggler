@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Resources;
@@ -52,8 +53,8 @@ namespace Win11ClockTogglerGUI
         private void DisableCheckBox(CheckBox chkBox)
         {
             chkBox.Enabled = false;
-            chkBox.Parent.ForeColor = Color.FromArgb(48, 48, 48);
-            chkBox.Parent.BackColor = Color.FromArgb(34, 34, 34);
+            chkBox.Parent.ForeColor = Theme.DisabledForeground;
+            chkBox.Parent.BackColor = Theme.DisabledPanelBackground;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -185,6 +186,7 @@ and let me know about this issue. Thanks!",
         //Form load 
         private void Win11ClockTogglerGUI_Load(object sender, EventArgs e)
         {
+            SetTheme();
             DisableCheckBox(DateTimeToggle);   //This is always fixed, for information purposes, because the Date/Time is always toggled
             //Get the latest state of the option checkboxes to keep them the same
             NotificationAreaToggle.Checked = (Helper.ReadRegValue(REG_CHKNOTIFAREA_STATUS, "1") == "1");
@@ -202,6 +204,33 @@ and let me know about this issue. Thanks!",
             //Check for new version in background
             bgwCheckVersion.RunWorkerAsync();
         }
+
+        private void SetTheme()
+        {
+            Theme = new ColorThemes.LightTheme();
+            try
+            {
+                int res = (int)Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "AppsUseLightTheme", -1);
+                if (res == 0)
+                {
+                       Theme = new ColorThemes.DarkTheme();
+                }
+            }
+            catch
+            {
+                //Exception Handling     
+            }
+
+            foreach (Panel panel in new List<Panel> { UpdatePanel, pnlNotifArea, ShowOnHoverPanel, pnlSecondary, pnlDateTime, AboutPanel, VisibilityPanel, ExitPanel })
+            {
+                panel.ForeColor = Theme.Foreground;
+                panel.BackColor = Theme.PanelBackground;
+            }
+
+            this.BackColor = Theme.Background;
+        }
+
+        private ColorThemes.Theme Theme;
 
         private void StartAutoTimer()
         {
@@ -328,8 +357,8 @@ and let me know about this issue. Thanks!",
                 lnkNewVersion.Text = $"New version {LatestVersion} available! Click here to download...";
                 lnkNewVersion.LinkArea = new LinkArea(0, lnkNewVersion.Text.Length);
                 lnkNewVersion.Visible = true;
-                UpdatePanel.ForeColor = Color.FromArgb(227, 227, 227);
-                UpdatePanel.BackColor = Color.FromArgb(43, 43, 43);
+                UpdatePanel.ForeColor = Theme.Foreground;
+                UpdatePanel.BackColor = Theme.PanelBackground;
             }
             else
             {
@@ -337,8 +366,8 @@ and let me know about this issue. Thanks!",
                 lnkNewVersion.Text = "You are on the latest version";
                 lnkNewVersion.LinkArea = new LinkArea();
 
-                UpdatePanel.ForeColor = Color.FromArgb(48, 48, 48);
-                UpdatePanel.BackColor = Color.FromArgb(34, 34, 34);
+                UpdatePanel.ForeColor = Theme.DisabledForeground;
+                UpdatePanel.BackColor = Theme.DisabledPanelBackground;
             }
         }
 
@@ -481,6 +510,7 @@ and let me know about this issue. Thanks!",
         private void panel3_Click(object sender, EventArgs e)
         {
             this.Close();
+            Application.Exit();
         }
 
         private void label14_Click(object sender, EventArgs e)
@@ -519,6 +549,11 @@ and let me know about this issue. Thanks!",
         private void label19_Click(object sender, EventArgs e)
         {
             btnHideShow_Click(null, null);
+        }
+
+        private void ExitPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

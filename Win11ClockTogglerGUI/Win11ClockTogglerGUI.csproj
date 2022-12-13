@@ -78,6 +78,9 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="ColorThemes\DarkTheme.cs" />
+    <Compile Include="ColorThemes\LightTheme.cs" />
+    <Compile Include="ColorThemes\Theme.cs" />
     <Compile Include="Win11ClockTogglerGUI.cs">
       <SubType>Form</SubType>
     </Compile>
