@@ -50,7 +50,7 @@
             this.ShowOnHoverPanel = new System.Windows.Forms.Panel();
             this.AutoHideLabel = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.AutoHideToggle = new System.Windows.Forms.CheckBox();
+            this.ShowOnHoverToggle = new System.Windows.Forms.CheckBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.AutoHideImage = new System.Windows.Forms.PictureBox();
@@ -131,8 +131,7 @@
             this.ExitPanel.Name = "ExitPanel";
             this.ExitPanel.Size = new System.Drawing.Size(901, 84);
             this.ExitPanel.TabIndex = 20;
-            this.ExitPanel.Click += new System.EventHandler(this.panel3_Click);
-            this.ExitPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.ExitPanel_Paint);
+            this.ExitPanel.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // label21
             // 
@@ -143,6 +142,7 @@
             this.label21.Size = new System.Drawing.Size(180, 17);
             this.label21.TabIndex = 19;
             this.label21.Text = "Leave the joy that is this app?";
+            this.label21.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // label22
             // 
@@ -150,9 +150,10 @@
             this.label22.Font = new System.Drawing.Font("Segoe UI Symbol", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.Location = new System.Drawing.Point(9, 21);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(44, 32);
+            this.label22.Size = new System.Drawing.Size(43, 32);
             this.label22.TabIndex = 17;
             this.label22.Text = "";
+            this.label22.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // ExitText
             // 
@@ -164,6 +165,7 @@
             this.ExitText.TabIndex = 16;
             this.ExitText.Text = "Exit";
             this.ExitText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ExitText.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // VisibilityPanel
             // 
@@ -180,8 +182,7 @@
             this.VisibilityPanel.Name = "VisibilityPanel";
             this.VisibilityPanel.Size = new System.Drawing.Size(901, 84);
             this.VisibilityPanel.TabIndex = 13;
-            this.VisibilityPanel.Click += new System.EventHandler(this.panel2_Click);
-            this.VisibilityPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            this.VisibilityPanel.Click += new System.EventHandler(this.btnHideShow_Click);
             // 
             // label20
             // 
@@ -193,7 +194,7 @@
             this.label20.TabIndex = 16;
             this.label20.Text = "Toggle Visibility";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label20.Click += new System.EventHandler(this.label20_Click);
+            this.label20.Click += new System.EventHandler(this.btnHideShow_Click);
             // 
             // label18
             // 
@@ -201,10 +202,10 @@
             this.label18.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.Location = new System.Drawing.Point(53, 50);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(88, 17);
+            this.label18.Size = new System.Drawing.Size(182, 17);
             this.label18.TabIndex = 19;
-            this.label18.Text = "Instant toggle";
-            this.label18.Click += new System.EventHandler(this.label18_Click);
+            this.label18.Text = "Instant toggle (Win+Caps+F6)";
+            this.label18.Click += new System.EventHandler(this.btnHideShow_Click);
             // 
             // label19
             // 
@@ -215,7 +216,7 @@
             this.label19.Size = new System.Drawing.Size(50, 37);
             this.label19.TabIndex = 17;
             this.label19.Text = "";
-            this.label19.Click += new System.EventHandler(this.label19_Click);
+            this.label19.Click += new System.EventHandler(this.btnHideShow_Click);
             // 
             // AboutPanel
             // 
@@ -232,7 +233,7 @@
             this.AboutPanel.Name = "AboutPanel";
             this.AboutPanel.Size = new System.Drawing.Size(901, 84);
             this.AboutPanel.TabIndex = 12;
-            this.AboutPanel.Click += new System.EventHandler(this.panel1_Click);
+            this.AboutPanel.Click += new System.EventHandler(this.cmdAbout_Click);
             // 
             // label17
             // 
@@ -243,7 +244,7 @@
             this.label17.Size = new System.Drawing.Size(147, 17);
             this.label17.TabIndex = 19;
             this.label17.Text = "Find out about this app.";
-            this.label17.Click += new System.EventHandler(this.label17_Click);
+            this.label17.Click += new System.EventHandler(this.cmdAbout_Click);
             // 
             // label2
             // 
@@ -251,10 +252,10 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI Symbol", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(9, 21);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 32);
+            this.label2.Size = new System.Drawing.Size(43, 32);
             this.label2.TabIndex = 17;
             this.label2.Text = "";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.label2.Click += new System.EventHandler(this.cmdAbout_Click);
             // 
             // label14
             // 
@@ -266,7 +267,7 @@
             this.label14.TabIndex = 16;
             this.label14.Text = "About";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label14.Click += new System.EventHandler(this.label14_Click);
+            this.label14.Click += new System.EventHandler(this.cmdAbout_Click);
             // 
             // UpdatePanel
             // 
@@ -308,7 +309,7 @@
             this.label15.Font = new System.Drawing.Font("Segoe UI Symbol", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.Location = new System.Drawing.Point(9, 21);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(44, 32);
+            this.label15.Size = new System.Drawing.Size(43, 32);
             this.label15.TabIndex = 17;
             this.label15.Text = "";
             // 
@@ -330,7 +331,7 @@
             this.ShowOnHoverPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(43)))));
             this.ShowOnHoverPanel.Controls.Add(this.AutoHideLabel);
             this.ShowOnHoverPanel.Controls.Add(this.label11);
-            this.ShowOnHoverPanel.Controls.Add(this.AutoHideToggle);
+            this.ShowOnHoverPanel.Controls.Add(this.ShowOnHoverToggle);
             this.ShowOnHoverPanel.Controls.Add(this.label12);
             this.ShowOnHoverPanel.Controls.Add(this.label13);
             this.ShowOnHoverPanel.Controls.Add(this.AutoHideImage);
@@ -358,20 +359,20 @@
             this.label11.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(52, 51);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(355, 17);
+            this.label11.Size = new System.Drawing.Size(458, 17);
             this.label11.TabIndex = 18;
-            this.label11.Text = "Show the Clock when hovering in its area, hiding otherwise?";
+            this.label11.Text = "Show the Clock after hovering in its area, autohiding it after a while otherwise";
             // 
-            // AutoHideToggle
+            // ShowOnHoverToggle
             // 
-            this.AutoHideToggle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.AutoHideToggle.AutoSize = true;
-            this.AutoHideToggle.Location = new System.Drawing.Point(798, 12);
-            this.AutoHideToggle.Name = "AutoHideToggle";
-            this.AutoHideToggle.Size = new System.Drawing.Size(15, 14);
-            this.AutoHideToggle.TabIndex = 9;
-            this.AutoHideToggle.UseVisualStyleBackColor = true;
-            this.AutoHideToggle.CheckedChanged += new System.EventHandler(this.AutoHideToggle_CheckedChanged);
+            this.ShowOnHoverToggle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ShowOnHoverToggle.AutoSize = true;
+            this.ShowOnHoverToggle.Location = new System.Drawing.Point(798, 12);
+            this.ShowOnHoverToggle.Name = "ShowOnHoverToggle";
+            this.ShowOnHoverToggle.Size = new System.Drawing.Size(15, 14);
+            this.ShowOnHoverToggle.TabIndex = 9;
+            this.ShowOnHoverToggle.UseVisualStyleBackColor = true;
+            this.ShowOnHoverToggle.CheckedChanged += new System.EventHandler(this.AutoHideToggle_CheckedChanged);
             // 
             // label12
             // 
@@ -379,7 +380,7 @@
             this.label12.Font = new System.Drawing.Font("Segoe UI Symbol", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.Location = new System.Drawing.Point(9, 21);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(44, 32);
+            this.label12.Size = new System.Drawing.Size(43, 32);
             this.label12.TabIndex = 17;
             this.label12.Text = "";
             // 
@@ -397,6 +398,7 @@
             // AutoHideImage
             // 
             this.AutoHideImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.AutoHideImage.Cursor = System.Windows.Forms.Cursors.Hand;
             this.AutoHideImage.Location = new System.Drawing.Point(821, 36);
             this.AutoHideImage.Name = "AutoHideImage";
             this.AutoHideImage.Size = new System.Drawing.Size(77, 32);
@@ -430,7 +432,7 @@
             this.label23.Font = new System.Drawing.Font("Segoe UI Symbol", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.Location = new System.Drawing.Point(10, 29);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(44, 32);
+            this.label23.Size = new System.Drawing.Size(43, 32);
             this.label23.TabIndex = 18;
             this.label23.Text = "";
             // 
@@ -454,7 +456,6 @@
             this.label5.Size = new System.Drawing.Size(173, 17);
             this.label5.TabIndex = 15;
             this.label5.Text = "Show That notification Area?";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
             // 
@@ -478,6 +479,7 @@
             // NotificationAreaImage
             // 
             this.NotificationAreaImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.NotificationAreaImage.Cursor = System.Windows.Forms.Cursors.Hand;
             this.NotificationAreaImage.Location = new System.Drawing.Point(821, 29);
             this.NotificationAreaImage.Name = "NotificationAreaImage";
             this.NotificationAreaImage.Size = new System.Drawing.Size(77, 32);
@@ -508,6 +510,7 @@
             this.pnlDateTime.Controls.Add(this.DateTimeImage);
             this.pnlDateTime.Controls.Add(this.DateTimeToggle);
             this.pnlDateTime.Controls.Add(this.label1);
+            this.pnlDateTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlDateTime.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.pnlDateTime.Location = new System.Drawing.Point(10, 10);
             this.pnlDateTime.Margin = new System.Windows.Forms.Padding(10);
@@ -549,6 +552,7 @@
             // DateTimeImage
             // 
             this.DateTimeImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DateTimeImage.Cursor = System.Windows.Forms.Cursors.Hand;
             this.DateTimeImage.Location = new System.Drawing.Point(821, 26);
             this.DateTimeImage.Name = "DateTimeImage";
             this.DateTimeImage.Size = new System.Drawing.Size(77, 32);
@@ -639,11 +643,11 @@
             this.label10.TabIndex = 16;
             this.label10.Text = "Secondary Screens";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // SecondaryImage
             // 
             this.SecondaryImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SecondaryImage.Cursor = System.Windows.Forms.Cursors.Hand;
             this.SecondaryImage.Location = new System.Drawing.Point(821, 26);
             this.SecondaryImage.Name = "SecondaryImage";
             this.SecondaryImage.Size = new System.Drawing.Size(77, 32);
@@ -770,7 +774,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnlSecondary;
         private System.Windows.Forms.ToolTip toolTipSecondary;
-        private System.Windows.Forms.CheckBox AutoHideToggle;
+        private System.Windows.Forms.CheckBox ShowOnHoverToggle;
         private System.Windows.Forms.CheckBox SecondaryToggle;
         private System.Windows.Forms.CheckBox DateTimeToggle;
         private System.Windows.Forms.CheckBox NotificationAreaToggle;

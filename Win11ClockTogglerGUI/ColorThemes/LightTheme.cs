@@ -1,13 +1,19 @@
 ﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace Win11ClockTogglerGUI.ColorThemes
 {
     public class LightTheme : Theme
     {
-        public override Color Foreground { get => Color.FromArgb(20, 20, 20); }
-        public override Color PanelBackground { get => Color.FromArgb(189, 189, 189); }
-        public override Color DisabledForeground { get => Color.FromArgb(66, 66, 66); }
-        public override Color DisabledPanelBackground { get => Color.FromArgb(111, 111, 111); }
-        public override Color Background { get => Color.FromArgb(158, 158, 158); }
+        //Enabled panel Foreground text color
+        public override Color Foreground { get => SystemColors.WindowText; }
+        //Enabled panel panel background color
+        public override Color PanelBackground { get => SystemColors.ControlLight; }
+        //Disabled panel foreground text color
+        public override Color DisabledForeground { get => SystemColors.InactiveCaptionText; }
+        //Disabled panel background text color
+        public override Color DisabledPanelBackground { get => SystemColors.InactiveCaption; }
+        //Form background
+        public override Color Background { get => SystemColors.ControlLightLight; }
     }
 }
