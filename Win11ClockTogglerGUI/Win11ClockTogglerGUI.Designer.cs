@@ -474,7 +474,6 @@
             this.label7.TabIndex = 13;
             this.label7.Text = "Notification Area";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // NotificationAreaImage
             // 
@@ -654,7 +653,6 @@
             this.SecondaryImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.SecondaryImage.TabIndex = 12;
             this.SecondaryImage.TabStop = false;
-            this.SecondaryImage.LoadCompleted += new System.ComponentModel.AsyncCompletedEventHandler(this.SecondaryImage_LoadCompleted);
             this.SecondaryImage.Click += new System.EventHandler(this.SecondaryImage_Click);
             // 
             // SecondaryToggle

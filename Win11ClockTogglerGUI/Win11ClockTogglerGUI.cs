@@ -317,6 +317,8 @@ and let me know about this issue. Thanks!",
 
             float dpiFactor = dx / 96f;
 
+            //Width and height ot the Windows 11 clock
+            //TODO: in a next version get that from the Win32 API since this was hardcoded by @madninjaskillz
             int left = res.Right - (int)(170 * dpiFactor);
             int top = res.Bottom - (int)(48 * dpiFactor);
 
@@ -466,11 +468,6 @@ and let me know about this issue. Thanks!",
             SetImageFromToggle(SecondaryToggle, SecondaryImage, SecondaryLabel);
         }
 
-        private void SecondaryImage_LoadCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
-        {
-            
-        }
-
         private void DateTimeImage_Click(object sender, EventArgs e)
         {
             ClickToggleImage(DateTimeToggle);
@@ -492,26 +489,6 @@ and let me know about this issue. Thanks!",
         private void SecondaryImage_Click(object sender, EventArgs e)
         {
             ClickToggleImage(SecondaryToggle);
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void AutoHideImage_Click(object sender, EventArgs e)
