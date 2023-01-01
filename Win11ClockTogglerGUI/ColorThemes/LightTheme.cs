@@ -8,14 +8,14 @@ namespace Win11ClockTogglerGUI.ColorThemes
     public class LightTheme : Theme
     {
         //Enabled panel Foreground text color
-        public override Color Foreground { get => Color.FromArgb(255, 30, 30, 30); }
+        public override Color Foreground { get => Color.FromArgb(30, 30, 30); }
         //Enabled panel panel background color
-        public override Color PanelBackground { get => Color.FromArgb(255, 245, 245, 245); }
+        public override Color PanelBackground { get => Color.FromArgb(245, 245, 245); }
         //Disabled panel foreground text color
-        public override Color DisabledForeground { get => Color.FromArgb(255, 162, 164, 165); }
+        public override Color DisabledForeground { get => Color.FromArgb(162, 164, 165); }
         //Disabled panel background text color
-        public override Color DisabledPanelBackground { get => Color.FromArgb(255, 245, 245, 245); }
+        public override Color DisabledPanelBackground { get => Color.FromArgb(245, 245, 245); }
         //Form background
-        public override Color Background { get => Color.FromArgb(255, 238, 238, 242); }
+        public override Color Background { get => Color.FromArgb(238, 238, 242); }
     }
 }
