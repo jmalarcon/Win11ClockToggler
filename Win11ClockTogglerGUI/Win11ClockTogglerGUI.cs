@@ -181,7 +181,9 @@ and let me know about this issue. Thanks!",
         private void Win11ClockTogglerGUI_Load(object sender, EventArgs e)
         {
             SetTheme();
-            DisableCheckBox(DateTimeToggle);   //This is always fixed, for information purposes, because the Date/Time is always toggled
+            //This is always switched on because the Date/Time is always toggled (it's the main purpose of the app)
+            //It's shown disabled for information purposes only
+            DisableCheckBox(DateTimeToggle);
             
             //Get the latest state of the option checkboxes to keep them the same
             NotificationAreaToggle.Checked = (Helper.ReadRegValue(REG_CHKNOTIFAREA_STATUS, "1") == "1");
@@ -191,9 +193,11 @@ and let me know about this issue. Thanks!",
             //Check if there are secondary taskbars in secondary windows
             if (!Helper.AreThereSecondaryTaskbars())
             {
-                //Disable checkbox if there are not secondary taskbars
+                //Disable checkbox (and its parent panel) if there are not secondary taskbars
+                pnlSecondary.Enabled = false;
                 SecondaryToggle.Checked = false;
                 DisableCheckBox(SecondaryToggle);
+                //Disable corresponding panel
             }
 
             //Swap checkboxes for slider images
@@ -203,20 +207,34 @@ and let me know about this issue. Thanks!",
             bgwCheckVersion.RunWorkerAsync();
         }
 
+        //Set Theme on init
         private void SetTheme()
         {
             Theme = ThemeHelper.GetCurrentTheme();
+            
+            //Form background
+            this.BackColor = Theme.Background;
 
             //Get all the panels to set their colors according to theme
             var panels = pnlCheckBoxes.Controls.OfType<Panel>();
             //Change theme for each panel
             foreach(Panel panel in panels)
             {
-                panel.ForeColor = Theme.Foreground;
-                panel.BackColor = Theme.PanelBackground;
+                SetThemeForPanel(panel);
             }
+        }
 
-            this.BackColor = Theme.Background;
+        //Set theme for panel depending on current state
+        private void SetThemeForPanel(Panel panel)
+        {
+            bool enabled = panel.Enabled;
+            panel.ForeColor = enabled ? Theme.Foreground : Theme.DisabledForeground;
+            panel.BackColor = enabled ? Theme.PanelBackground : Theme.DisabledPanelBackground;
+            //Change the text color for each child control
+            foreach (Control c in panel.Controls)
+            {
+                c.ForeColor = enabled ? Theme.Foreground : Theme.DisabledForeground;
+            }
         }
 
         //Swaps a checkbox for a slider image for the current status (hiding the checkbox)
@@ -242,15 +260,19 @@ and let me know about this issue. Thanks!",
         }
 
         // Enables or disables all the panels that have options (used by the next ones for convenience)
+        //It doesn't really disable it (for not changeing behavour) but makes it
         private void EnableDisableOptionPanels(bool enable)
         {
             //Select all the panels
             var panels = pnlCheckBoxes.Controls.OfType<Panel>();
             foreach (Panel panel in panels) 
             { 
-                //Check if panel contains a checkbox
-                if (panel.Controls.OfType<CheckBox>().Count() > 0)
+                //Check if panel contains a checkbox and doesn't have an imposed enabled state in the Tag
+                if (panel.Controls.OfType<CheckBox>().Count() > 0 && panel.Tag == null)
+                {
                     panel.Enabled = enable;
+                    SetThemeForPanel(panel);
+                }
             }
         }
 
@@ -270,8 +292,7 @@ and let me know about this issue. Thanks!",
         private void DisableCheckBox(CheckBox chkBox)
         {
             chkBox.Enabled = false;
-            chkBox.Parent.ForeColor = Theme.DisabledForeground;
-            chkBox.Parent.BackColor = Theme.DisabledPanelBackground;
+            SetThemeForPanel(chkBox.Parent as Panel);
         }
 
         #region Mouse hover over DateTime area to show it again
@@ -409,26 +430,17 @@ and let me know about this issue. Thanks!",
             //If there's a new version, show the label with the infomation and link
             if (LatestVersion != null && LatestVersion != string.Empty)
             {
-                lnkNewVersion.Text = $"New version {LatestVersion} available! Click here to download...";
-                lnkNewVersion.LinkArea = new LinkArea(0, lnkNewVersion.Text.Length);
-                lnkNewVersion.Visible = true;
-                UpdatePanel.ForeColor = Theme.Foreground;
-                UpdatePanel.BackColor = Theme.PanelBackground;
+                lblNewVersion.Text = $"⚠️ New version {LatestVersion} available! Click here to download...";
+                UpdatePanel.Enabled = true;
+                UpdatePanel.Tag = null; //To allow it to be enabled/disables after each toggle
+                SetThemeForPanel(UpdatePanel);
+                tmrNewVersionFlash.Enabled = true;
             }
             else
             {
-                lnkNewVersion.Visible = true;
-                lnkNewVersion.Text = "You are on the latest version";
-                lnkNewVersion.LinkArea = new LinkArea();
-
-                UpdatePanel.ForeColor = Theme.DisabledForeground;
-                UpdatePanel.BackColor = Theme.DisabledPanelBackground;
+                lblNewVersion.Text = "You are on the latest version";
             }
-        }
-
-        private void lnkNewVersion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://github.com/jmalarcon/Win11ClockToggler/releases");
+            
         }
 
         private void notifyIcon_Click(object sender, EventArgs e)
@@ -512,5 +524,30 @@ and let me know about this issue. Thanks!",
         {
             this.Cursor = Cursors.Default;
         }
+
+        //Underline new version label when mouse over
+        private void lblNewVersion_MouseHover(object sender, EventArgs e)
+        {
+            lblNewVersion.Font = new Font(lblNewVersion.Font, FontStyle.Underline);
+        }
+
+        //Back to normal (no underline)
+        private void lblNewVersion_MouseLeave(object sender, EventArgs e)
+        {
+            lblNewVersion.Font = new Font(lblNewVersion.Font, FontStyle.Regular);
+        }
+
+        //Open browser to go to GitHub and download new version
+        private void lblNewVersion_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/jmalarcon/Win11ClockToggler/releases");
+        }
+
+        //Make the new version flash if there's a new version (if not, maybe is not as noticiable as it was in the previous version)
+        private void tmrNewVersionFlash_Tick(object sender, EventArgs e)
+        {
+            lblNewVersion.Visible = !lblNewVersion.Visible;
+        }
+
     }
 }
