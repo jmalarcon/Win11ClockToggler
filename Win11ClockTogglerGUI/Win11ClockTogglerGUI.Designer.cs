@@ -58,7 +58,6 @@
             this.label23 = new System.Windows.Forms.Label();
             this.NotificationAreaLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.NotificationAreaImage = new System.Windows.Forms.PictureBox();
             this.NotificationAreaToggle = new System.Windows.Forms.CheckBox();
@@ -102,6 +101,9 @@
             // 
             // pnlCheckBoxes
             // 
+            this.pnlCheckBoxes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlCheckBoxes.AutoScroll = true;
             this.pnlCheckBoxes.Controls.Add(this.ExitPanel);
             this.pnlCheckBoxes.Controls.Add(this.VisibilityPanel);
@@ -111,10 +113,9 @@
             this.pnlCheckBoxes.Controls.Add(this.pnlNotifArea);
             this.pnlCheckBoxes.Controls.Add(this.pnlDateTime);
             this.pnlCheckBoxes.Controls.Add(this.pnlSecondary);
-            this.pnlCheckBoxes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCheckBoxes.Location = new System.Drawing.Point(0, 0);
             this.pnlCheckBoxes.Name = "pnlCheckBoxes";
-            this.pnlCheckBoxes.Size = new System.Drawing.Size(923, 734);
+            this.pnlCheckBoxes.Size = new System.Drawing.Size(627, 734);
             this.pnlCheckBoxes.TabIndex = 5;
             // 
             // ExitPanel
@@ -130,7 +131,7 @@
             this.ExitPanel.Location = new System.Drawing.Point(10, 640);
             this.ExitPanel.Margin = new System.Windows.Forms.Padding(10);
             this.ExitPanel.Name = "ExitPanel";
-            this.ExitPanel.Size = new System.Drawing.Size(901, 84);
+            this.ExitPanel.Size = new System.Drawing.Size(624, 84);
             this.ExitPanel.TabIndex = 20;
             this.ExitPanel.Click += new System.EventHandler(this.btnExit_Click);
             // 
@@ -183,7 +184,7 @@
             this.VisibilityPanel.Location = new System.Drawing.Point(10, 550);
             this.VisibilityPanel.Margin = new System.Windows.Forms.Padding(10);
             this.VisibilityPanel.Name = "VisibilityPanel";
-            this.VisibilityPanel.Size = new System.Drawing.Size(901, 84);
+            this.VisibilityPanel.Size = new System.Drawing.Size(624, 84);
             this.VisibilityPanel.TabIndex = 13;
             this.VisibilityPanel.Click += new System.EventHandler(this.btnHideShow_Click);
             // 
@@ -236,7 +237,7 @@
             this.AboutPanel.Location = new System.Drawing.Point(10, 460);
             this.AboutPanel.Margin = new System.Windows.Forms.Padding(10);
             this.AboutPanel.Name = "AboutPanel";
-            this.AboutPanel.Size = new System.Drawing.Size(901, 84);
+            this.AboutPanel.Size = new System.Drawing.Size(624, 84);
             this.AboutPanel.TabIndex = 12;
             this.AboutPanel.Click += new System.EventHandler(this.cmdAbout_Click);
             // 
@@ -289,7 +290,7 @@
             this.UpdatePanel.Location = new System.Drawing.Point(10, 370);
             this.UpdatePanel.Margin = new System.Windows.Forms.Padding(10);
             this.UpdatePanel.Name = "UpdatePanel";
-            this.UpdatePanel.Size = new System.Drawing.Size(901, 84);
+            this.UpdatePanel.Size = new System.Drawing.Size(624, 84);
             this.UpdatePanel.TabIndex = 11;
             this.UpdatePanel.Tag = "Disabled";
             this.UpdatePanel.Click += new System.EventHandler(this.lblNewVersion_Click);
@@ -304,9 +305,9 @@
             this.lblNewVersion.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNewVersion.Location = new System.Drawing.Point(53, 56);
             this.lblNewVersion.Name = "lblNewVersion";
-            this.lblNewVersion.Size = new System.Drawing.Size(339, 17);
+            this.lblNewVersion.Size = new System.Drawing.Size(338, 17);
             this.lblNewVersion.TabIndex = 20;
-            this.lblNewVersion.Text = "⚠ New version 2.0.0 available! Click here to download...";
+            this.lblNewVersion.Text = "⚠ New version x.0.0 available! Click here to download...";
             this.lblNewVersion.Click += new System.EventHandler(this.lblNewVersion_Click);
             this.lblNewVersion.MouseLeave += new System.EventHandler(this.lblNewVersion_MouseLeave);
             this.lblNewVersion.MouseHover += new System.EventHandler(this.lblNewVersion_MouseHover);
@@ -348,10 +349,10 @@
             this.ShowOnHoverPanel.Controls.Add(this.AutoHideImage);
             this.ShowOnHoverPanel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ShowOnHoverPanel.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.ShowOnHoverPanel.Location = new System.Drawing.Point(10, 100);
+            this.ShowOnHoverPanel.Location = new System.Drawing.Point(10, 281);
             this.ShowOnHoverPanel.Margin = new System.Windows.Forms.Padding(10);
             this.ShowOnHoverPanel.Name = "ShowOnHoverPanel";
-            this.ShowOnHoverPanel.Size = new System.Drawing.Size(901, 84);
+            this.ShowOnHoverPanel.Size = new System.Drawing.Size(624, 84);
             this.ShowOnHoverPanel.TabIndex = 10;
             this.ShowOnHoverPanel.Click += new System.EventHandler(this.AutoHideImage_Click);
             // 
@@ -362,7 +363,7 @@
             this.AutoHideLabel.BackColor = System.Drawing.Color.Transparent;
             this.AutoHideLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.AutoHideLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AutoHideLabel.Location = new System.Drawing.Point(790, 43);
+            this.AutoHideLabel.Location = new System.Drawing.Point(462, 43);
             this.AutoHideLabel.Name = "AutoHideLabel";
             this.AutoHideLabel.Size = new System.Drawing.Size(26, 17);
             this.AutoHideLabel.TabIndex = 19;
@@ -377,16 +378,16 @@
             this.label11.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(52, 51);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(458, 17);
+            this.label11.Size = new System.Drawing.Size(398, 17);
             this.label11.TabIndex = 18;
-            this.label11.Text = "Show the Clock after hovering in its area, autohiding it after a while otherwise";
+            this.label11.Text = "Show the Clock after hovering in its area, autohiding it after a while";
             this.label11.Click += new System.EventHandler(this.AutoHideImage_Click);
             // 
             // ShowOnHoverToggle
             // 
             this.ShowOnHoverToggle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ShowOnHoverToggle.AutoSize = true;
-            this.ShowOnHoverToggle.Location = new System.Drawing.Point(798, 12);
+            this.ShowOnHoverToggle.Location = new System.Drawing.Point(470, 12);
             this.ShowOnHoverToggle.Name = "ShowOnHoverToggle";
             this.ShowOnHoverToggle.Size = new System.Drawing.Size(15, 14);
             this.ShowOnHoverToggle.TabIndex = 9;
@@ -423,7 +424,7 @@
             // 
             this.AutoHideImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.AutoHideImage.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.AutoHideImage.Location = new System.Drawing.Point(821, 36);
+            this.AutoHideImage.Location = new System.Drawing.Point(493, 36);
             this.AutoHideImage.Name = "AutoHideImage";
             this.AutoHideImage.Size = new System.Drawing.Size(77, 32);
             this.AutoHideImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -439,16 +440,15 @@
             this.pnlNotifArea.Controls.Add(this.label23);
             this.pnlNotifArea.Controls.Add(this.NotificationAreaLabel);
             this.pnlNotifArea.Controls.Add(this.label5);
-            this.pnlNotifArea.Controls.Add(this.label6);
             this.pnlNotifArea.Controls.Add(this.label7);
             this.pnlNotifArea.Controls.Add(this.NotificationAreaImage);
             this.pnlNotifArea.Controls.Add(this.NotificationAreaToggle);
             this.pnlNotifArea.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pnlNotifArea.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.pnlNotifArea.Location = new System.Drawing.Point(10, 190);
+            this.pnlNotifArea.Location = new System.Drawing.Point(10, 102);
             this.pnlNotifArea.Margin = new System.Windows.Forms.Padding(10);
             this.pnlNotifArea.Name = "pnlNotifArea";
-            this.pnlNotifArea.Size = new System.Drawing.Size(901, 84);
+            this.pnlNotifArea.Size = new System.Drawing.Size(624, 84);
             this.pnlNotifArea.TabIndex = 8;
             this.pnlNotifArea.Click += new System.EventHandler(this.NotificationAreaImage_Click);
             // 
@@ -472,7 +472,7 @@
             this.NotificationAreaLabel.BackColor = System.Drawing.Color.Transparent;
             this.NotificationAreaLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.NotificationAreaLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NotificationAreaLabel.Location = new System.Drawing.Point(790, 36);
+            this.NotificationAreaLabel.Location = new System.Drawing.Point(462, 36);
             this.NotificationAreaLabel.Name = "NotificationAreaLabel";
             this.NotificationAreaLabel.Size = new System.Drawing.Size(26, 17);
             this.NotificationAreaLabel.TabIndex = 16;
@@ -492,13 +492,6 @@
             this.label5.Text = "Show That notification Area?";
             this.label5.Click += new System.EventHandler(this.NotificationAreaImage_Click);
             // 
-            // label6
-            // 
-            this.label6.Location = new System.Drawing.Point(0, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(100, 23);
-            this.label6.TabIndex = 17;
-            // 
             // label7
             // 
             this.label7.BackColor = System.Drawing.Color.Transparent;
@@ -516,7 +509,7 @@
             // 
             this.NotificationAreaImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.NotificationAreaImage.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.NotificationAreaImage.Location = new System.Drawing.Point(821, 29);
+            this.NotificationAreaImage.Location = new System.Drawing.Point(493, 29);
             this.NotificationAreaImage.Name = "NotificationAreaImage";
             this.NotificationAreaImage.Size = new System.Drawing.Size(77, 32);
             this.NotificationAreaImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -528,7 +521,7 @@
             // 
             this.NotificationAreaToggle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.NotificationAreaToggle.AutoSize = true;
-            this.NotificationAreaToggle.Location = new System.Drawing.Point(798, 12);
+            this.NotificationAreaToggle.Location = new System.Drawing.Point(470, 12);
             this.NotificationAreaToggle.Name = "NotificationAreaToggle";
             this.NotificationAreaToggle.Size = new System.Drawing.Size(15, 14);
             this.NotificationAreaToggle.TabIndex = 10;
@@ -552,7 +545,7 @@
             this.pnlDateTime.Location = new System.Drawing.Point(10, 10);
             this.pnlDateTime.Margin = new System.Windows.Forms.Padding(10);
             this.pnlDateTime.Name = "pnlDateTime";
-            this.pnlDateTime.Size = new System.Drawing.Size(901, 83);
+            this.pnlDateTime.Size = new System.Drawing.Size(624, 83);
             this.pnlDateTime.TabIndex = 9;
             this.pnlDateTime.Tag = "Disabled";
             // 
@@ -562,11 +555,11 @@
             this.DateTimeLabel.AutoSize = true;
             this.DateTimeLabel.BackColor = System.Drawing.Color.Transparent;
             this.DateTimeLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DateTimeLabel.Location = new System.Drawing.Point(790, 33);
+            this.DateTimeLabel.Location = new System.Drawing.Point(462, 33);
             this.DateTimeLabel.Name = "DateTimeLabel";
-            this.DateTimeLabel.Size = new System.Drawing.Size(26, 17);
+            this.DateTimeLabel.Size = new System.Drawing.Size(25, 17);
             this.DateTimeLabel.TabIndex = 17;
-            this.DateTimeLabel.Text = "Off";
+            this.DateTimeLabel.Text = "On";
             // 
             // label4
             // 
@@ -594,7 +587,7 @@
             // 
             this.DateTimeImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.DateTimeImage.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.DateTimeImage.Location = new System.Drawing.Point(821, 26);
+            this.DateTimeImage.Location = new System.Drawing.Point(493, 26);
             this.DateTimeImage.Name = "DateTimeImage";
             this.DateTimeImage.Size = new System.Drawing.Size(77, 32);
             this.DateTimeImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -606,7 +599,9 @@
             // 
             this.DateTimeToggle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.DateTimeToggle.AutoSize = true;
-            this.DateTimeToggle.Location = new System.Drawing.Point(798, 7);
+            this.DateTimeToggle.Checked = true;
+            this.DateTimeToggle.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.DateTimeToggle.Location = new System.Drawing.Point(470, 7);
             this.DateTimeToggle.Name = "DateTimeToggle";
             this.DateTimeToggle.Size = new System.Drawing.Size(15, 14);
             this.DateTimeToggle.TabIndex = 9;
@@ -638,10 +633,10 @@
             this.pnlSecondary.Controls.Add(this.SecondaryToggle);
             this.pnlSecondary.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pnlSecondary.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.pnlSecondary.Location = new System.Drawing.Point(10, 280);
+            this.pnlSecondary.Location = new System.Drawing.Point(10, 192);
             this.pnlSecondary.Margin = new System.Windows.Forms.Padding(10);
             this.pnlSecondary.Name = "pnlSecondary";
-            this.pnlSecondary.Size = new System.Drawing.Size(901, 84);
+            this.pnlSecondary.Size = new System.Drawing.Size(624, 84);
             this.pnlSecondary.TabIndex = 9;
             this.pnlSecondary.Click += new System.EventHandler(this.SecondaryImage_Click);
             // 
@@ -652,7 +647,7 @@
             this.SecondaryLabel.BackColor = System.Drawing.Color.Transparent;
             this.SecondaryLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.SecondaryLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SecondaryLabel.Location = new System.Drawing.Point(790, 33);
+            this.SecondaryLabel.Location = new System.Drawing.Point(462, 33);
             this.SecondaryLabel.Name = "SecondaryLabel";
             this.SecondaryLabel.Size = new System.Drawing.Size(26, 17);
             this.SecondaryLabel.TabIndex = 19;
@@ -702,7 +697,7 @@
             // 
             this.SecondaryImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SecondaryImage.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SecondaryImage.Location = new System.Drawing.Point(821, 26);
+            this.SecondaryImage.Location = new System.Drawing.Point(493, 26);
             this.SecondaryImage.Name = "SecondaryImage";
             this.SecondaryImage.Size = new System.Drawing.Size(77, 32);
             this.SecondaryImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -714,7 +709,7 @@
             // 
             this.SecondaryToggle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SecondaryToggle.AutoSize = true;
-            this.SecondaryToggle.Location = new System.Drawing.Point(798, 10);
+            this.SecondaryToggle.Location = new System.Drawing.Point(470, 10);
             this.SecondaryToggle.Name = "SecondaryToggle";
             this.SecondaryToggle.Size = new System.Drawing.Size(15, 14);
             this.SecondaryToggle.TabIndex = 11;
@@ -759,7 +754,7 @@
             // ToggleOffSource
             // 
             this.ToggleOffSource.Image = global::Win11ClockTogglerGUI.Properties.Resources.toggle_off;
-            this.ToggleOffSource.Location = new System.Drawing.Point(800, 19);
+            this.ToggleOffSource.Location = new System.Drawing.Point(800, 20);
             this.ToggleOffSource.Name = "ToggleOffSource";
             this.ToggleOffSource.Size = new System.Drawing.Size(100, 50);
             this.ToggleOffSource.TabIndex = 11;
@@ -773,21 +768,19 @@
             // 
             // Win11ClockTogglerGUI
             // 
-            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.AutoScroll = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(923, 734);
+            this.ClientSize = new System.Drawing.Size(634, 736);
             this.Controls.Add(this.pnlCheckBoxes);
             this.Controls.Add(this.ToggleOnSource);
             this.Controls.Add(this.ToggleOffSource);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(608, 587);
+            this.MaximizeBox = false;
             this.Name = "Win11ClockTogglerGUI";
             this.ShowInTaskbar = false;
-            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Windows 11 Date//Time & Notification Area Toggler";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Win11ClockTogglerGUI_FormClosing);
@@ -843,7 +836,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
