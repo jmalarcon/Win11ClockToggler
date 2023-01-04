@@ -549,5 +549,11 @@ and let me know about this issue. Thanks!",
             lblNewVersion.Visible = !lblNewVersion.Visible;
         }
 
+        //Detect ENTER and ESC press to toggle visibility or exit form
+        private void Win11ClockTogglerGUI_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape) { this.Close(); }
+            if (e.KeyCode == Keys.Enter) { btnHideShow_Click(null, null); }
+        }
     }
 }

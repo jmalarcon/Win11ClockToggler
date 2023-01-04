@@ -777,6 +777,7 @@
             this.Controls.Add(this.ToggleOnSource);
             this.Controls.Add(this.ToggleOffSource);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "Win11ClockTogglerGUI";
             this.ShowInTaskbar = false;
@@ -785,6 +786,7 @@
             this.Text = "Windows 11 Date//Time & Notification Area Toggler";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Win11ClockTogglerGUI_FormClosing);
             this.Load += new System.EventHandler(this.Win11ClockTogglerGUI_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Win11ClockTogglerGUI_KeyDown);
             this.pnlCheckBoxes.ResumeLayout(false);
             this.ExitPanel.ResumeLayout(false);
             this.ExitPanel.PerformLayout();
