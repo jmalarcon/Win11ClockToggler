@@ -1,5 +1,7 @@
 # Win11ClockToggler
 
+> ⁉️**WARNING**:  Windows 11 22H2 v22621.1344, released in March 2023 has changed the way the toolbar works internally and the "hacks" I needed to to for this to work, **don't work anymore**. I've not found a way to overcome the difficulty so, unfortunately, **this app only works with Windows 11 < 22H2 v22621.1344** and Windows 10. Sorry. If I ever found a way to fix it or if they release a new "more conventional" toolbar in a new update, I'll keep you posted.
+
 One of the many bummers in **Windows 11** is **the inability to hide the date/time** in the taskbar. This is really an annoyance if you create screen recordings or tutorials and don't want the clock to be shown in your final video.
 
 After waiting for months for Microsoft to fix this issue, I decided to write this handy little tool: **Win11ClockToggler**.

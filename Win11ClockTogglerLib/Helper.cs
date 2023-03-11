@@ -165,19 +165,32 @@ namespace Win11ClockToggler
             );
         }
 
+        //Gets the hWnd for the DateTime container control, depending on the current structure of the taskbar (changes between Windows versions)
         public static IntPtr GetDateTimeControlHWnd()
         {
             IntPtr clockHWnd = IntPtr.Zero; //Default value
 
             //Get Tray Win32 child windows
-            List<IntPtr> children = GetTrayNotifyHWndChildren();
+            List<IntPtr> children = GetTrayNotifyHWndChildren();    //First, try Windows 11 versions before 22H2 v22621.1344 --> March 2023
             if (children.Count > 0)     //If Zero the taskbar has changed and is not Win10 Or 11
             {
                 //Get the clock (date/time) control in Windows 11
                 clockHWnd = children.Find(child => Win32APIs.GetClassName(child) == "Windows.UI.Composition.DesktopWindowContentBridge");
-                if (clockHWnd == IntPtr.Zero)   //Check for control in Windows 10
+
+                //If control is not found, let's find if it's Windows 10
+                //In Windows 10 the DateTime is the TrayClockWClass child of the TrayNotifyWnd control
+                if (clockHWnd == IntPtr.Zero)
                 {
                     clockHWnd = children.Find(child => Win32APIs.GetClassName(child) == "TrayClockWClass");
+                }
+
+                //If it's still not found, then probably is Windows 11 22H2 v22621.1344 or later.
+                //In that case, the DateTime container should be a child of the main Taskbar instead
+                //It's the same control but located at a different level in the hierarchy (they changed it on that version)
+                if (clockHWnd == IntPtr.Zero)
+                {
+                    children = GetTaskbarHWndChildren();
+                    clockHWnd = children.Find(child => Win32APIs.GetClassName(child) == "Windows.UI.Composition.DesktopWindowContentBridge");
                 }
             }
             return clockHWnd;
@@ -288,6 +301,15 @@ namespace Win11ClockToggler
         {
             //Find Notification Tray handler
             return Win32APIs.FindWindowEx(hWndTaskbar, IntPtr.Zero, "TrayNotifyWnd", null);
+        }
+
+        internal static List<IntPtr> GetTaskbarHWndChildren()
+        {
+            IntPtr hWnd = GetTaskbarHWnd();
+            if (hWnd == IntPtr.Zero)
+                return new List<IntPtr>();  //Empty list
+            else
+                return Win32APIs.GetChildWindows(hWnd);
         }
 
         internal static List<IntPtr> GetTrayNotifyHWndChildren()
