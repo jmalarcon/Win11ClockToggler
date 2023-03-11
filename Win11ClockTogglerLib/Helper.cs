@@ -171,14 +171,27 @@ namespace Win11ClockToggler
             IntPtr clockHWnd = IntPtr.Zero; //Default value
 
             //Get Tray Win32 child windows
-            List<IntPtr> children = GetTrayNotifyHWndChildren();
+            List<IntPtr> children = GetTrayNotifyHWndChildren();    //First, try Windows 11 versions before 22H2 v22621.1344 --> March 2023
             if (children.Count > 0)     //If Zero the taskbar has changed and is not Win10 Or 11
             {
                 //Get the clock (date/time) control in Windows 11
                 clockHWnd = children.Find(child => Win32APIs.GetClassName(child) == "Windows.UI.Composition.DesktopWindowContentBridge");
-                if (clockHWnd == IntPtr.Zero)   //Check for control in Windows 10
+
+                //If control is not found, let's find if it's Windows 10
+                //In Windows 10 the DateTime is the TrayClockWClass child of the TrayNotifyWnd control
+                if (clockHWnd == IntPtr.Zero)
                 {
                     clockHWnd = children.Find(child => Win32APIs.GetClassName(child) == "TrayClockWClass");
+                }
+
+                //If it's still not found, then probably is Windows 11 22H2 v22621.1344 or later.
+                //In that case, the DateTime container should be a child of the main Taskbar instead
+                //It's the same control but located at a different level in the hierarchy (they changed it on that version)
+                if (clockHWnd == IntPtr.Zero)
+                {
+                    children = GetTaskbarHWndChildren();
+                    //THE PROBLEM whith this is that it hides the FULL toolbar for whatever reason 🤔 so It doesn't work as expected.
+                    clockHWnd = children.Find(child => Win32APIs.GetClassName(child) == "Windows.UI.Composition.DesktopWindowContentBridge");
                 }
             }
             return clockHWnd;
