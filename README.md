@@ -1,5 +1,7 @@
 # Win11ClockToggler
 
+>⚠️ From Windows 11 23H2 (released at the end of October 2023), there's a system option that allows you to hide the time and date in the system tray. Just open Windows Configuration (WIN+I) and go to "Time and Language > Data & Time" and search for the option "Show time and date in the System tray". Slide if off and you're done. My program is no longer needed for this.
+
 > ⁉️**WARNING** (March 3rd 2023):  Windows 11 22H2 v22621.1344, released in March 2023 has changed the way the toolbar works internally and the "hacks" I needed to to for this to work, **don't work anymore**. I've not found a way to overcome the difficulty so, unfortunately, **this app only works with Windows 11 < 22H2 v22621.1344** and Windows 10. Sorry. If I ever found a way to fix it or if they release a new "more conventional" toolbar in a new update, I'll keep you posted.
 
 One of the many bummers in **Windows 11** is **the inability to hide the date/time** in the taskbar. This is really an annoyance if you create screen recordings or tutorials and don't want the clock to be shown in your final video.
